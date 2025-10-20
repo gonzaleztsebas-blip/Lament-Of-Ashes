@@ -1,0 +1,14 @@
+# Carpetas de compilación de NetBeans
+/build/
+/dist/
+
+# Configuración privada de NetBeans
+/nbproject/private/
+
+# Archivos compilados de Java
+*.class
+
+# Logs y basura
+*.log
+*.tmp
+.DS_Store
