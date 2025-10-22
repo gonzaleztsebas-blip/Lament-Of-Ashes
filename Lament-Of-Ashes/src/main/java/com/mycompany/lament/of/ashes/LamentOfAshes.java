@@ -14,5 +14,6 @@ public class LamentOfAshes {
         System.out.println("Verifiquemos que todos tenemos acceso: ");
         System.out.println("Sebas");
         System.out.println("jUanCho");
+        System.out.println("MiGuE");
     }
 }
