@@ -11,6 +11,7 @@ package com.mycompany.lament.of.ashes;
 public class LamentOfAshes {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Verifiquemos que todos tenemos acceso: ");
+        System.out.println("Sebas");
     }
 }
