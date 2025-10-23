@@ -20,7 +20,18 @@ public class character {
         return damage;
     }
     
-    public void takeDamage(int damage){
-        health -= damage;
+    public void takeDamage(int damageRecieved){
+        health -= damageRecieved;
+        if (health < 0){
+            health = 0;
+        }
+    }
+    
+    public int attack(){
+        return damage;
+    }
+    
+    public boolean isAlive(){
+        return health > 0;
     }
 }
