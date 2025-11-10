@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.lamentofashes.logic;
-import com.lamentofashes.model.entity.enemy.*;
+import com.lamentofashes.model.entity.enemy.Ghost;
+import com.lamentofashes.model.entity.enemy.Enemy;
+import com.lamentofashes.model.entity.enemy.Skeleton;
+import com.lamentofashes.model.entity.enemy.DarkMage;
 import java.util.Random;
 
 /**
