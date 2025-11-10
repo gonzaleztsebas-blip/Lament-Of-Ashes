@@ -5,6 +5,7 @@
 package com.lamentofashes.logic;
 import com.lamentofashes.model.entity.Player;
 import com.lamentofashes.model.entity.enemy.Enemy;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,33 +14,43 @@ import com.lamentofashes.model.entity.enemy.Enemy;
 public class BattleManager {
     private Player player;
     private EnemyFactory enemyFactory;
-    private Enemy enemy;
+    private ArrayList<Enemy> enemies;
     
     public BattleManager(){
         this.player = new Player("Seb", 100, 20);
         this.enemyFactory = new EnemyFactory();
-        this.enemy = enemyFactory.generateEnemy();
+        generateEnemies(3);
     }
     
-    public void battle(){
-        System.out.println("EMPIEZA LA BATALLA");
-        System.out.println("Un " + enemy.getName() + " salvaje ha aparecido");
-        int turn = 1;
-        
-        while(!player.isDead() && !enemy.isDead()){
-            System.out.println("Vida actual de " + player.getName() + ": " + player.getHealth());
-            System.out.println("Vida actual de " + enemy.getName() + ": " + enemy.getHealth());
-            if (turn % 2 == 1){
-                System.out.println("Turno de " + player.getName());
-                enemy.takeDamage(player.getBaseDamage());
-                System.out.println(player.getName() + " ataca a " + enemy.getName() + " (" + player.getBaseDamage() + " de daño)");
-            }else{
-                System.out.println("Turno de " + enemy.getName());
-                player.takeDamage(enemy.getBaseDamage());
-                System.out.println(enemy.getName() + " ataca a " + player.getName() + " (" + enemy.getBaseDamage() + " de daño)");
-            }
-            turn++;
+    private void generateEnemies(int count){
+        enemies = new ArrayList<>();
+        for (int i = 0; i < count; i++){
+            enemies.add(enemyFactory.generateEnemy());
         }
-        System.out.println(player.isDead() ? "Derrota" : "Victoria");
     }
+    
+    public Player getPlayer(){
+        return player;
+    }
+    
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
+    }
+    
+    public boolean isBattleOver(){
+        return player.isDead() || enemies.isEmpty();
+    }
+    
+    public void playerAttack(int enemyIndex) {
+        Enemy target = enemies.get(enemyIndex);
+        target.takeDamage(player.getBaseDamage());
+        enemies.removeIf(Enemy::isDead);
+    }
+
+    public void enemiesTurn() {
+        for(int i = 0; i < enemies.size(); i++) {
+            player.takeDamage(enemies.get(i).getBaseDamage());
+        }
+    }
+
 }

@@ -10,8 +10,8 @@ package com.lamentofashes.logic;
  */
 public class LogicTester {
     public static void main(String[] args) {
-        BattleManager battleManager = new BattleManager();
-        battleManager.battle();
+        ConsoleBattle consoleBattle = new ConsoleBattle();
+        consoleBattle.startBattle();
     }
 }
 
