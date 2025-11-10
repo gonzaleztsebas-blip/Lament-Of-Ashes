@@ -5,6 +5,7 @@
 package com.lamentofashes.logic;
 import com.lamentofashes.model.entity.Player;
 import com.lamentofashes.model.entity.enemy.Enemy;
+import com.lamentofashes.model.skills.Attack;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ public class BattleManager {
     private ArrayList<Enemy> enemies;
     
     public BattleManager(){
-        this.player = new Player("Seb", 100, 20);
+        this.player = new Player("Seb", 100, 100, 15);
         this.enemyFactory = new EnemyFactory();
         generateEnemies(3);
     }
@@ -41,9 +42,33 @@ public class BattleManager {
         return player.isDead() || enemies.isEmpty();
     }
     
-    public void playerAttack(int enemyIndex) {
-        Enemy target = enemies.get(enemyIndex);
-        target.takeDamage(player.getBaseDamage());
+    public boolean playerAttack(int attackIndex, int enemyIndex) { 
+        Attack attack = player.getAttacks().get(attackIndex);
+        if (player.getPower() < attack.getPowerCost()) {
+            return false;
+        }
+        
+        int damage = attack.use();
+        if(attack.getType() == 2){
+            specialAttack(damage);
+        }else{
+            Enemy target = enemies.get(enemyIndex);
+            target.takeDamage(damage);
+                if(target.isDead()){
+                    enemies.remove(target);
+                }
+        }
+        player.consumePower(attack.getPowerCost());
+        
+        return true;
+    }
+    
+    private void specialAttack(int damage){
+        for(int i = 0; i < enemies.size(); i++){
+           Enemy e = enemies.get(i);
+           e.takeDamage(damage);
+           
+        }
         enemies.removeIf(Enemy::isDead);
     }
 
