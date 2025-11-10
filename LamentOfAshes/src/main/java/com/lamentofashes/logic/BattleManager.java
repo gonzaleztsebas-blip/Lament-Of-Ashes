@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.lamentofashes.logic;
-import com.lamentofashes.model.Entity.*;
+import com.lamentofashes.model.entity.Player;
+import com.lamentofashes.model.entity.enemy.Enemy;
 
 /**
  *
@@ -11,15 +12,18 @@ import com.lamentofashes.model.Entity.*;
  */
 public class BattleManager {
     private Player player;
+    private EnemyFactory enemyFactory;
     private Enemy enemy;
     
     public BattleManager(){
         this.player = new Player("Seb", 100, 20);
-        this.enemy = new Enemy("Esqueleto", 80, 10);
+        this.enemyFactory = new EnemyFactory();
+        this.enemy = enemyFactory.generateEnemy();
     }
     
     public void battle(){
         System.out.println("EMPIEZA LA BATALLA");
+        System.out.println("Un " + enemy.getName() + " salvaje ha aparecido");
         int turn = 1;
         
         while(!player.isDead() && !enemy.isDead()){
