@@ -10,6 +10,6 @@ package com.lamentofashes.model.entity.enemy;
  */
 public class Ghost extends Enemy{
     public Ghost(){
-        super("Fantasma", 40, 5);
+        super("Fantasma", 35, 5);
     }
 }

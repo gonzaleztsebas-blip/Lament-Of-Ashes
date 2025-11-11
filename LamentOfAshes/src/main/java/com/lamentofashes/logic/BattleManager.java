@@ -18,7 +18,7 @@ public class BattleManager {
     private ArrayList<Enemy> enemies;
     
     public BattleManager(){
-        this.player = new Player("Seb", 100, 100, 15);
+        this.player = new Player("Seb", 100, 100, 20);
         this.enemyFactory = new EnemyFactory();
         generateEnemies(3);
     }

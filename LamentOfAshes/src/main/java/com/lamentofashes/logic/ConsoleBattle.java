@@ -36,7 +36,7 @@ public class ConsoleBattle {
                 System.out.println("Enemigos:");
                 for(int i = 0; i < enemies.size(); i++){
                     Enemy e = enemies.get(i);
-                    System.out.println((i+1) + ": " + e.getName() + " - HP: " + e.getHealth());
+                    System.out.println((i+1) + ": " + e.getName() + " - HP: " + e.getHealth() + " - Dano: " + e.getBaseDamage());
                 }
                 System.out.println("Elige a quien atacar: ");
                 enemyChoice = scanner.nextInt();

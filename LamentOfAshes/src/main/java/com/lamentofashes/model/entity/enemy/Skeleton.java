@@ -10,6 +10,6 @@ package com.lamentofashes.model.entity.enemy;
  */
 public class Skeleton extends Enemy{
     public Skeleton(){
-        super("Esqueleto", 30, 10);
+        super("Esqueleto", 25, 10);
     }
 }
