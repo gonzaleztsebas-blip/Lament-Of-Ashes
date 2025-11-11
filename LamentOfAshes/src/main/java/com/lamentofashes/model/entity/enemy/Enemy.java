@@ -4,13 +4,21 @@
  */
 package com.lamentofashes.model.entity.enemy;
 import com.lamentofashes.model.entity.Entity;
+import java.util.Random;
 
 /**
  *
  * @author ASUS
  */
 public class Enemy extends Entity{
-    public Enemy(String name, int maxHealth, int damage){
-        super(name, maxHealth, damage);
+    private Random random;
+    
+    
+    public Enemy(String name, int maxHealth, int minHealth, int maxDamage, int minDamage){
+        super(name, 
+              new Random().nextInt(maxHealth - minHealth + 1) + minHealth, 
+              new Random().nextInt(maxDamage - minDamage + 1) + minDamage
+        );
     }
+
 }
