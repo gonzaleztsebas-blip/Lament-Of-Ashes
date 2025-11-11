@@ -6,6 +6,7 @@ package com.lamentofashes.logic;
 import com.lamentofashes.model.entity.*;
 import com.lamentofashes.model.entity.enemy.*;
 import com.lamentofashes.model.skills.Attack;
+import com.lamentofashes.model.battle.AttackResult;
 import java.util.Scanner;
 import java.util.ArrayList;
 /**
@@ -27,7 +28,6 @@ public class ConsoleBattle {
         while(!battleManager.isBattleOver()){
             player = battleManager.getPlayer();
             enemies = battleManager.getEnemies();
-            boolean cost = false;
             
             System.out.println("\nVida del jugador: " + player.getHealth() + " | Poder: " + player.getPower());
             
@@ -46,14 +46,14 @@ public class ConsoleBattle {
                 }
             }
             
-            int attackChoice = -1;
-            while(attackChoice < 0 || attackChoice > player.getAttacks().size()){
+            AttackResult result = new AttackResult ("", "", "", 0);
+            while(result.getDamage() == 0){
                 System.out.println("Elige el ataque que vas a usar");
                 for(int i = 0; i < player.getAttacks().size(); i++){
                     Attack a = player.getAttacks().get(i);
                     System.out.println((i+1) +". " + a.toString());
                 }
-                attackChoice = scanner.nextInt();
+                int attackChoice = scanner.nextInt();
                 scanner.nextLine();
                 
                 if(attackChoice < 0 || attackChoice > player.getAttacks().size()){
@@ -61,23 +61,27 @@ public class ConsoleBattle {
                     continue;
                 }
                 
+                result = battleManager.playerAttack(attackChoice-1, enemyChoice-1);
+                System.out.println(result);
                 
-                if(!cost){
-                   cost = battleManager.playerAttack(attackChoice-1, enemyChoice-1);
-                   if(!cost){
-                       System.out.println("No hay suficiente poder para usar " + player.getAttack(attackChoice-1).getName());
-                       attackChoice = -1;
-                   }
-                }
             }
 
-            battleManager.enemiesTurn();
+            ArrayList<AttackResult> enemiesResult = battleManager.enemiesTurn();
+            for(int i=0; i < enemiesResult.size(); i++){
+            System.out.println(enemiesResult.get(i));
+            }
             player.regenetarePower();
         }
         if(battleManager.getPlayer().isDead()){
             System.out.println("Derrota");
         } else {
             System.out.println("Victoria");
+        }
+        
+        
+        System.out.println("Resumen de la batalla: ");
+        for(int i=0; i < battleManager.getBattleResults().size(); i++){
+            System.out.println(battleManager.getAttackResults(i));
         }
     }
 }
