@@ -14,6 +14,9 @@ public class Attack {
     private int powerCost;
     private int minDamage;
     private int maxDamage;
+    
+    //type 1: normal attack
+    //type 2: area attack
     private int type;
     
     public Attack(String name, int powerCost, int minDamage, int maxDamage, int type){

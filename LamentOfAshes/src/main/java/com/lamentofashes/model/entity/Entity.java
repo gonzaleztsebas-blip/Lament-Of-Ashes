@@ -29,6 +29,13 @@ public class Entity {
         return maxHealth;
     }
     
+    public void heal(int amount){
+        health += amount;
+        if(health > maxHealth){
+            health = maxHealth;
+        }
+    }
+    
     public int getHealth(){
         return health;
     }
