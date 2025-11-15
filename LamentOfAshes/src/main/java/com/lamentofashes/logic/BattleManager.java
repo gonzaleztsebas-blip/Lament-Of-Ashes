@@ -42,7 +42,13 @@ public class BattleManager {
     }
     
     public boolean isBattleOver(){
-        return player.isDead() || enemies.isEmpty();
+        boolean allEnemiesDead = true;
+        for(int i = 0; i < enemies.size() && allEnemiesDead; i++){
+            if(!(enemies.get(i) == null)){
+                allEnemiesDead = false;
+            }
+        }
+        return allEnemiesDead || player.isDead();
     }
     
     public AttackResult playerAttack(int attackIndex, int enemyIndex) { 
@@ -58,7 +64,7 @@ public class BattleManager {
         }else{
             target.takeDamage(damage);
                 if(target.isDead()){
-                    enemies.remove(target);
+                    enemies.set(enemyIndex, null);
                 }
         }
         player.consumePower(attack.getPowerCost());
@@ -76,16 +82,24 @@ public class BattleManager {
     private void specialAttack(int damage){
         for(int i = 0; i < enemies.size(); i++){
            Enemy e = enemies.get(i);
+           if(e == null){
+               continue;
+           } 
            e.takeDamage(damage);
+           if(e.isDead()){
+               enemies.set(i, null);
+           }
            
         }
-        enemies.removeIf(Enemy::isDead);
     }
 
     public ArrayList<AttackResult> enemiesTurn() {
         ArrayList<AttackResult> enemiesResults = new ArrayList<>();
         for(int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
+            if(e == null){
+                continue;
+            }
             player.takeDamage(e.getBaseDamage());
             AttackResult result = new AttackResult(
                 e.getName(),
