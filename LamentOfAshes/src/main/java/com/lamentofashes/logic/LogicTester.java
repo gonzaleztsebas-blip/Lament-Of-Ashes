@@ -12,7 +12,7 @@ import com.lamentofashes.logic.battle.ConsoleBattle;
  */
 public class LogicTester {
     public static void main(String[] args) {
-        ConsoleBattle consoleBattle = new ConsoleBattle(2);
+        ConsoleBattle consoleBattle = new ConsoleBattle(5);
         consoleBattle.startBattle();
     }
 }

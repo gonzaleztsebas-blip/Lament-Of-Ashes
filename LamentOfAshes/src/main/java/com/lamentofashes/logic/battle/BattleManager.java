@@ -63,7 +63,7 @@ public class BattleManager {
     public AttackResult playerAttack(int attackIndex, int enemyIndex) { 
         Attack attack = player.getAttacks().get(attackIndex);
         if (player.getPower() < attack.getPowerCost()) {
-            return new AttackResult(player.getName(), attack.getName() + " (sin poder)", "-",  "0");
+            return new AttackResult(player.getName(), attack.getName() + " (sin poder)", "-",  "0", false);
         }
         
         Enemy target = enemies.get(enemyIndex);
@@ -83,7 +83,8 @@ public class BattleManager {
             player.getName(),
             attack.getName(),
             attack.getType()==2?"Todos":target.getName(),
-            Integer.toString(damage));
+            Integer.toString(damage),
+            false);
         battleResults.add(result);
         
         return result;
@@ -110,12 +111,15 @@ public class BattleManager {
             if(e == null){
                 continue;
             }
-            player.takeDamage(e.getBaseDamage());
+            
+            int damage = e.calculateDamage();
+            player.takeDamage(damage);
             AttackResult result = new AttackResult(
                 e.getName(),
                 "Ataque",
                 player.getName(),
-                Integer.toString(e.getBaseDamage()));
+                Integer.toString(damage),
+                damage > e.getBaseDamage());
             enemiesResults.add(result);
             battleResults.add(result);
         }

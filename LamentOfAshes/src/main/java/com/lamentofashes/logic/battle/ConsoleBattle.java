@@ -97,7 +97,7 @@ public class ConsoleBattle {
             }
         }
             
-        AttackResult result = new AttackResult ("", "", "", "0");
+        AttackResult result = new AttackResult ("", "", "", "0", false);
         while(result.getEffect().equals("0")){
             System.out.println("Elige el ataque que vas a usar");
             for(int i = 0; i < player.getAttacks().size(); i++){

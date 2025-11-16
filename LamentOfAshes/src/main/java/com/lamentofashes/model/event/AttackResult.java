@@ -10,18 +10,29 @@ package com.lamentofashes.model.event;
  */
 public class AttackResult extends Event{
     private String target;
+    private boolean critical;
     
-    public AttackResult(String character, String attackName, String target, String damage){
+    public AttackResult(String character, String attackName, String target, String damage, boolean critical){
         super(character, attackName, damage);
         this.target = target;
+        this.critical = critical;
     }
     
     @Override
     public String toString(){
+        String attack = areaAttack();
+        if(critical){
+            attack += " causando daño critico";
+        }
+        
+        return attack;
+    }
+    
+    public String areaAttack(){
         if(target.equals("Todos")){
-            return getCharacter() + " usa " + getAction() + " causando " + getEffect() + " de dano a todos los enemigos";
+            return getCharacter() + " usa " + getAction() + " causando " + getEffect() + " de daño a todos los enemigos";
         }else{
-            return getCharacter() + " usa " + getAction() + " causando " + getEffect() + " de dano a " + target;
+            return getCharacter() + " usa " + getAction() + " causando " + getEffect() + " de daño a " + target;
         }
     }
     
