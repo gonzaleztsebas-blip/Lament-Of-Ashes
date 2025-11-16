@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.lamentofashes.logic;
+package com.lamentofashes.logic.battle;
 import com.lamentofashes.model.entity.*;
 import com.lamentofashes.model.entity.enemy.*;
 import com.lamentofashes.model.skills.Attack;
@@ -19,8 +19,8 @@ public class ConsoleBattle {
     private BattleManager battleManager;
     private Scanner scanner = new Scanner(System.in);
     
-    public ConsoleBattle() {
-        this.battleManager = new BattleManager();
+    public ConsoleBattle(int enemiesNumber) {
+        this.battleManager = new BattleManager(enemiesNumber);
     }
     
     
@@ -118,8 +118,8 @@ public class ConsoleBattle {
     }
     
     private void useConsumable(Player player){
-        int choice = -1;
-        while(choice < 0 || choice > player.getInventory().size()){
+        ConsumableResult result = new ConsumableResult("", "", "0", 1);
+        while(result.getEffect().equals("0")){
             System.out.println("Elige el consumible: ");
             for(int i = 0; i < player.getInventory().size(); i++){
                 Consumable c = player.getInventory().get(i);
@@ -128,14 +128,16 @@ public class ConsoleBattle {
                 }
                 System.out.println((i + 1) + ". " + c);
             }
-            choice = scanner.nextInt() - 1;
+            int choice = scanner.nextInt() - 1;
             scanner.nextLine();
             if(choice < 0 || choice > player.getInventory().size()){
                 System.out.println("Objeto no valido");
+                continue;
             }
+            result = battleManager.useConsumable(choice);
         }
         
-        ConsumableResult result = battleManager.useConsumable(choice);
+        
         System.out.println(result);
     }
 }

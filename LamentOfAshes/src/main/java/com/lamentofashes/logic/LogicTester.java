@@ -4,13 +4,15 @@
  */
 package com.lamentofashes.logic;
 
+import com.lamentofashes.logic.battle.ConsoleBattle;
+
 /**
  *
  * @author ASUS
  */
 public class LogicTester {
     public static void main(String[] args) {
-        ConsoleBattle consoleBattle = new ConsoleBattle();
+        ConsoleBattle consoleBattle = new ConsoleBattle(2);
         consoleBattle.startBattle();
     }
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.lamentofashes.logic;
+package com.lamentofashes.logic.factorys;
 import com.lamentofashes.model.entity.enemy.*;
 import java.util.Random;
 

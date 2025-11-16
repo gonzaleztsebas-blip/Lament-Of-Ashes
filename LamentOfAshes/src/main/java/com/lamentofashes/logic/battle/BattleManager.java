@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.lamentofashes.logic;
+package com.lamentofashes.logic.battle;
+import com.lamentofashes.logic.factorys.EnemyFactory;
 import com.lamentofashes.model.event.*;
 import com.lamentofashes.model.entity.Player;
 import com.lamentofashes.model.entity.enemy.*;
@@ -20,12 +21,11 @@ public class BattleManager {
     private ArrayList<Enemy> enemies;
     private ArrayList<Event> battleResults;
     
-    public BattleManager(){
+    public BattleManager(int enemiesNumber){
         this.player = new Player("Seb", 100, 100, 20);
         this.enemyFactory = new EnemyFactory();
-        generateEnemies(3);
+        generateEnemies(enemiesNumber);
         this.battleResults = new ArrayList<>();
-        generateConsumables();
     }
     
     private void generateEnemies(int count){
@@ -124,6 +124,9 @@ public class BattleManager {
 
     public ConsumableResult useConsumable(int consumableIndex){
         Consumable c = player.getInventory().get(consumableIndex);
+        if(c == null){
+            return new ConsumableResult(player.getName(), "no existe el consumible", "0", 1);
+        }
         ConsumableResult result = new ConsumableResult(
             player.getName(),
             c.getName(),
