@@ -13,21 +13,21 @@ import java.util.Random;
 public class EnemyFactory {
     private Random random = new Random();
     
-    public Enemy generateEnemy(){
+    public Enemy generateEnemy(double hpMultiplier, double damageMultiplier, double criticMultiplier){
         Enemy enemy;
         int index = random.nextInt(3);
         switch (index){
             case 0:
-                enemy =  new Skeleton();
+                enemy =  new Skeleton(hpMultiplier, damageMultiplier, criticMultiplier);
                 break;
             case 1:
-                enemy = new DarkMage();
+                enemy = new DarkMage(hpMultiplier, damageMultiplier, criticMultiplier);
                 break;
             case 2:
-                enemy = new Ghost();
+                enemy = new Ghost(hpMultiplier, damageMultiplier, criticMultiplier);
                 break;
             default:
-                enemy = new Skeleton();
+                enemy = new Skeleton(hpMultiplier, damageMultiplier, criticMultiplier);
                 break;
         }
         return enemy;

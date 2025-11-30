@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.lamentofashes.logic.battle;
-import com.lamentofashes.logic.factorys.EnemyFactory;
 import com.lamentofashes.model.event.*;
 import com.lamentofashes.model.entity.Player;
 import com.lamentofashes.model.entity.enemy.*;
@@ -17,29 +16,13 @@ import java.util.ArrayList;
  */
 public class BattleManager {
     private Player player;
-    private EnemyFactory enemyFactory;
     private ArrayList<Enemy> enemies;
     private ArrayList<Event> battleResults;
     
-    public BattleManager(int enemiesNumber){
-        this.player = new Player("Seb", 100, 100, 20);
-        this.enemyFactory = new EnemyFactory();
-        generateEnemies(enemiesNumber);
+    public BattleManager(ArrayList<Enemy> enemies, Player player){
+        this.player = player;
+        this.enemies = enemies;
         this.battleResults = new ArrayList<>();
-    }
-    
-    private void generateEnemies(int count){
-        enemies = new ArrayList<>();
-        for (int i = 0; i < count; i++){
-            enemies.add(enemyFactory.generateEnemy());
-        }
-    }
-    
-    private void generateConsumables(){
-        player.addConsumable(new SmallHealPotion());
-        player.addConsumable(new BigHealPotion());
-        player.addConsumable(new MinorPowerEssence());
-        player.addConsumable(new MajorPowerEssence());
     }
     
     public Player getPlayer(){

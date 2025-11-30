@@ -13,7 +13,7 @@ import java.util.Random;
 public class BossFactory {
     private Random random = new Random();
     
-    public Boss generateBpss(){
-        return new Boss();
+    public Boss generateBoss(double hpMultiplier, double damageMultiplier, double criticMultiplier){
+        return new Boss(hpMultiplier, damageMultiplier, criticMultiplier);
     }
 }

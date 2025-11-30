@@ -4,7 +4,6 @@
  */
 package com.lamentofashes.logic;
 
-import com.lamentofashes.logic.battle.ConsoleBattle;
 
 /**
  *
@@ -12,8 +11,8 @@ import com.lamentofashes.logic.battle.ConsoleBattle;
  */
 public class LogicTester {
     public static void main(String[] args) {
-        ConsoleBattle consoleBattle = new ConsoleBattle(5);
-        consoleBattle.startBattle();
+        GameEngine ge = new GameEngine();
+        ge.runGame();
     }
 }
 

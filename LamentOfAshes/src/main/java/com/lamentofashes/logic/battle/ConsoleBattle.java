@@ -19,12 +19,12 @@ public class ConsoleBattle {
     private BattleManager battleManager;
     private Scanner scanner = new Scanner(System.in);
     
-    public ConsoleBattle(int enemiesNumber) {
-        this.battleManager = new BattleManager(enemiesNumber);
+    public ConsoleBattle(BattleManager battleManager) {
+        this.battleManager = battleManager;
     }
     
     
-    public void startBattle(){
+    public boolean startBattle(){
         Player player;
         ArrayList<Enemy> enemies;
         while(!battleManager.isBattleOver()){
@@ -58,15 +58,9 @@ public class ConsoleBattle {
             player.regenetarePower();
         }
         if(battleManager.getPlayer().isDead()){
-            System.out.println("Derrota");
+            return false;
         } else {
-            System.out.println("Victoria");
-        }
-        
-        
-        System.out.println("Resumen de la batalla: ");
-        for(int i=0; i < battleManager.getBattleResults().size(); i++){
-            System.out.println(battleManager.getAttackResults(i));
+            return true;
         }
     }
     
@@ -82,7 +76,7 @@ public class ConsoleBattle {
     
     private void attack(Player player, ArrayList<Enemy> enemies){
         int enemyChoice = -1;
-        while(enemyChoice < 0 || enemyChoice > enemies.size()){
+        while(enemyChoice < 0 || enemyChoice >= enemies.size()){
             System.out.println("A quien deseas atacar?");
             System.out.println("Enemigos:");
             printEnemies(enemies);
@@ -140,4 +134,5 @@ public class ConsoleBattle {
         
         System.out.println(result);
     }
+    
 }

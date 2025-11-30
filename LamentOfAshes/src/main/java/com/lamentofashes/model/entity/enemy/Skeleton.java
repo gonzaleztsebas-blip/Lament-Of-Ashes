@@ -9,7 +9,7 @@ package com.lamentofashes.model.entity.enemy;
  * @author ASUS
  */
 public class Skeleton extends Enemy{
-    public Skeleton(){
-        super("Esqueleto", 25, 20, 10, 5, 0.1);
+    public Skeleton(double hpMultiplier, double damageMultiplier, double criticMultiplier){
+        super("Esqueleto", 25, 20, 12, 8, 0.1,  hpMultiplier, damageMultiplier, criticMultiplier);
     }
 }

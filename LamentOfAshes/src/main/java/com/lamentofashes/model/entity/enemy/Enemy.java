@@ -15,12 +15,13 @@ public class Enemy extends Entity{
     private double criticChance;
     
     
-    public Enemy(String name, int maxHealth, int minHealth, int maxDamage, int minDamage, double criticChance){
+    public Enemy(String name, int maxHealth, int minHealth, int maxDamage, int minDamage, double criticChance, 
+            double hpMultiplier, double damageMultiplier, double criticMultiplier){
         super(name,                 
-              new Random().nextInt(maxHealth - minHealth + 1) + minHealth, 
-              new Random().nextInt(maxDamage - minDamage + 1) + minDamage
+              (int)((new Random().nextInt(maxHealth - minHealth + 1) + minHealth) * hpMultiplier), 
+              (int)((new Random().nextInt(maxDamage - minDamage + 1) + minDamage) * damageMultiplier)
         );
-        this.criticChance = criticChance;
+        this.criticChance = criticChance * criticMultiplier;
     }
 
     public int calculateDamage(){

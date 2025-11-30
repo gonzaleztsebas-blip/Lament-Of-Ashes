@@ -25,7 +25,7 @@ public class Player extends Entity{
     public Player(String name, int maxHealth, int maxPower, int powerRegeneration){
         super(name, maxHealth, 0);
         this.powerRegeneration = powerRegeneration;
-        this.power = 0;
+        this.power = 50;
         this.maxPower = maxPower;
         generateAttacks();
         this.inventory = createEmptyInventory(maxInventorySize);
