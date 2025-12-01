@@ -18,11 +18,13 @@ public class BattleManager {
     private Player player;
     private ArrayList<Enemy> enemies;
     private ArrayList<Event> battleResults;
+    private EnemyAI ai;
     
     public BattleManager(ArrayList<Enemy> enemies, Player player){
         this.player = player;
         this.enemies = enemies;
         this.battleResults = new ArrayList<>();
+        this.ai = new EnemyAI();
     }
     
     public Player getPlayer(){
@@ -52,9 +54,12 @@ public class BattleManager {
         Enemy target = enemies.get(enemyIndex);
         
         int damage = attack.use();
-        if(attack.getType() == 2){
+        if(attack.getType() == AttackType.AREA){
             specialAttack(damage);
         }else{
+            if(ai.decideAction(target) == EnemyAction.DEFEND){
+                target.guard();
+            }
             target.takeDamage(damage);
                 if(target.isDead()){
                     enemies.set(enemyIndex, null);
@@ -65,7 +70,7 @@ public class BattleManager {
         AttackResult result = new AttackResult(
             player.getName(),
             attack.getName(),
-            attack.getType()==2?"Todos":target.getName(),
+            attack.getType()==AttackType.AREA?"Todos":target.getName(),
             Integer.toString(damage),
             false);
         battleResults.add(result);
@@ -79,6 +84,9 @@ public class BattleManager {
            if(e == null){
                continue;
            } 
+           if(ai.decideAction(e) == EnemyAction.DEFEND){
+               e.guard();
+           }
            e.takeDamage(damage);
            if(e.isDead()){
                enemies.set(i, null);
@@ -87,11 +95,19 @@ public class BattleManager {
         }
     }
 
-    public ArrayList<AttackResult> enemiesTurn() {
-        ArrayList<AttackResult> enemiesResults = new ArrayList<>();
+    public ArrayList<Event> enemiesTurn() {
+        ArrayList<Event> enemiesResults = new ArrayList<>();
         for(int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
             if(e == null){
+                continue;
+            }
+            
+            if(e.isGuarding()){
+                e.stopGuarding();
+                DefenseResult result = new DefenseResult(e.getName(), Double.toString(e.getDefenseReduction() * 100));
+                enemiesResults.add(result);
+                battleResults.add(result);
                 continue;
             }
             
@@ -105,6 +121,8 @@ public class BattleManager {
                 damage > e.getBaseDamage());
             enemiesResults.add(result);
             battleResults.add(result);
+            
+            e.stopGuarding();
         }
         return enemiesResults;
     }
@@ -124,6 +142,8 @@ public class BattleManager {
         player.useConsumable(consumableIndex);
         return result;
     }
+    
+    
     
     public ArrayList<Event> getBattleResults(){
         return battleResults;

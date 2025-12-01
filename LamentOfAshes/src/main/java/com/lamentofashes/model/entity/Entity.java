@@ -13,12 +13,16 @@ public class Entity {
     private int maxHealth;
     private int health;
     private int damage;
+    private double defenseReduction;
+    private boolean guarding;
     
-    public Entity(String name, int maxHealth, int damage){
+    public Entity(String name, int maxHealth, int damage, double defense){
         this.name = name;
         this.maxHealth = maxHealth;
         this.health = maxHealth;
-        this.damage = damage;                
+        this.damage = damage;
+        this.defenseReduction = defense;
+        this.guarding = false;
     }
     
     public String getName(){
@@ -44,7 +48,31 @@ public class Entity {
         return damage;
     }
     
+    public double getDefenseReduction(){
+        return defenseReduction;
+    }
+    
+    public void guard(){
+        guarding = true;
+    }
+    
+    public void stopGuarding(){
+        guarding = false;
+    }
+    
+    public boolean isGuarding(){
+        return guarding;
+    }
+    
     public void takeDamage(int damage){
+        if(guarding){
+            damage = (int)(damage * (1 - defenseReduction));
+        }
+        
+        if (damage < 0){
+            damage = 0;
+        }
+        
         health -= damage;
         if (health < 0){
             health = 0;

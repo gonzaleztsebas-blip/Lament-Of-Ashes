@@ -23,7 +23,7 @@ public class Player extends Entity{
     
     
     public Player(String name, int maxHealth, int maxPower, int powerRegeneration){
-        super(name, maxHealth, 0);
+        super(name, maxHealth, 0, 0.5);
         this.powerRegeneration = powerRegeneration;
         this.power = 50;
         this.maxPower = maxPower;
@@ -33,9 +33,9 @@ public class Player extends Entity{
     
     public void generateAttacks(){
         this.attacks = new ArrayList<>();
-        attacks.add(new Attack("Ataque moderado", 0, 10, 20, 1));
-        attacks.add(new Attack("Ataque fuerte", 20, 30, 40, 1));
-        attacks.add(new Attack("Ataque especial", 50, 20, 30, 2));
+        attacks.add(new Attack("Ataque moderado", 0, 10, 20, AttackType.NORMAL));
+        attacks.add(new Attack("Ataque fuerte", 20, 30, 40, AttackType.NORMAL));
+        attacks.add(new Attack("Ataque especial", 50, 20, 30, AttackType.AREA));
     }
     
     private ArrayList<Consumable> createEmptyInventory(int size) {

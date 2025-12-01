@@ -10,6 +10,6 @@ package com.lamentofashes.model.entity.enemy;
  */
 public class DarkMage extends Enemy{
     public DarkMage( double hpMultiplier, double damageMultiplier, double criticMultiplier){
-        super("Mago Oscuro" , 20, 15, 15, 12, 0.1,  hpMultiplier,  damageMultiplier, criticMultiplier);
+        super("Mago Oscuro" , 20, 15, 15, 12, 0.1,  hpMultiplier,  damageMultiplier, criticMultiplier, 0.3);
     }
 }

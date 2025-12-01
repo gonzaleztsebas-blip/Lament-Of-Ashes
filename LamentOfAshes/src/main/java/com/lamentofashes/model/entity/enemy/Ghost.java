@@ -10,6 +10,6 @@ package com.lamentofashes.model.entity.enemy;
  */
 public class Ghost extends Enemy{
     public Ghost(double hpMultiplier, double damageMultiplier, double criticMultiplier){
-        super("Fantasma", 35, 30, 10, 5, 0.1, hpMultiplier, damageMultiplier, criticMultiplier);
+        super("Fantasma", 35, 30, 10, 5, 0.1, hpMultiplier, damageMultiplier, criticMultiplier, 0.3);
     }
 }

@@ -6,7 +6,7 @@ package com.lamentofashes.logic.battle;
 import com.lamentofashes.model.entity.*;
 import com.lamentofashes.model.entity.enemy.*;
 import com.lamentofashes.model.skills.Attack;
-import com.lamentofashes.model.event.AttackResult;
+import com.lamentofashes.model.event.*;
 import com.lamentofashes.model.event.ConsumableResult;
 import com.lamentofashes.model.item.consumable.*;
 import java.util.Scanner;
@@ -51,7 +51,7 @@ public class ConsoleBattle {
                         break;
                 }
             }
-            ArrayList<AttackResult> enemiesResult = battleManager.enemiesTurn();
+            ArrayList<Event> enemiesResult = battleManager.enemiesTurn();
             for(int i=0; i < enemiesResult.size(); i++){
                 System.out.println(enemiesResult.get(i));
             }

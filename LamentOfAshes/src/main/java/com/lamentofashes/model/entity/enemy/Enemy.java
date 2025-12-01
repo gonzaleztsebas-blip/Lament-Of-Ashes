@@ -16,10 +16,11 @@ public class Enemy extends Entity{
     
     
     public Enemy(String name, int maxHealth, int minHealth, int maxDamage, int minDamage, double criticChance, 
-            double hpMultiplier, double damageMultiplier, double criticMultiplier){
+            double hpMultiplier, double damageMultiplier, double criticMultiplier, double defenseReduction){
         super(name,                 
               (int)((new Random().nextInt(maxHealth - minHealth + 1) + minHealth) * hpMultiplier), 
-              (int)((new Random().nextInt(maxDamage - minDamage + 1) + minDamage) * damageMultiplier)
+              (int)((new Random().nextInt(maxDamage - minDamage + 1) + minDamage) * damageMultiplier),
+              defenseReduction
         );
         this.criticChance = criticChance * criticMultiplier;
     }

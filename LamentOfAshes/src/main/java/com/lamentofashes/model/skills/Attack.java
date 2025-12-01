@@ -15,11 +15,9 @@ public class Attack {
     private int minDamage;
     private int maxDamage;
     
-    //type 1: normal attack
-    //type 2: area attack
-    private int type;
+    private AttackType type;
     
-    public Attack(String name, int powerCost, int minDamage, int maxDamage, int type){
+    public Attack(String name, int powerCost, int minDamage, int maxDamage, AttackType type){
         this.random = new Random();
         this.name = name;
         this.powerCost = powerCost;
@@ -41,7 +39,7 @@ public class Attack {
         return powerCost;
     }
     
-    public int getType(){
+    public AttackType getType(){
         return type;
     }
     

@@ -10,7 +10,7 @@ package com.lamentofashes.model.entity.enemy;
 public class Boss extends Enemy {
     
     public Boss( double hpMultiplier, double damageMultiplier, double criticMultiplier){
-        super("Jefe Demonio", 150, 120, 25, 20, 0.3, hpMultiplier, damageMultiplier, criticMultiplier);
+        super("Jefe Demonio", 150, 120, 25, 20, 0.3, hpMultiplier, damageMultiplier, criticMultiplier, 0.4);
     }
     
 }
