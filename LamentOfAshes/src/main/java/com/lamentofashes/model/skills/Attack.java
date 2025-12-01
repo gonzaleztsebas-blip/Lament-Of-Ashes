@@ -14,20 +14,25 @@ public class Attack {
     private int powerCost;
     private int minDamage;
     private int maxDamage;
+    private double criticChance;
     
     private AttackType type;
     
-    public Attack(String name, int powerCost, int minDamage, int maxDamage, AttackType type){
+    public Attack(String name, int powerCost, int minDamage, int maxDamage, double criticChance, AttackType type){
         this.random = new Random();
         this.name = name;
         this.powerCost = powerCost;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
+        this.criticChance = criticChance;
         this.type = type;
     }
     
     public int use(){
         int finalDamage = random.nextInt(maxDamage - minDamage + 1) + minDamage;
+        if(random.nextDouble() <= criticChance){
+            finalDamage *= 2;
+        }
         return finalDamage;
     }
     
@@ -37,6 +42,10 @@ public class Attack {
     
     public int getPowerCost(){
         return powerCost;
+    }
+    
+    public int getMaxDamage(){
+        return maxDamage;
     }
     
     public AttackType getType(){

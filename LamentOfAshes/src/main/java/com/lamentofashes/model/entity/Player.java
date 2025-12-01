@@ -33,9 +33,9 @@ public class Player extends Entity{
     
     public void generateAttacks(){
         this.attacks = new ArrayList<>();
-        attacks.add(new Attack("Ataque moderado", 0, 10, 20, AttackType.NORMAL));
-        attacks.add(new Attack("Ataque fuerte", 20, 30, 40, AttackType.NORMAL));
-        attacks.add(new Attack("Ataque especial", 50, 20, 30, AttackType.AREA));
+        attacks.add(new Attack("Ataque moderado", 0, 10, 20, 0.05, AttackType.NORMAL));
+        attacks.add(new Attack("Ataque fuerte", 20, 30, 40, 0.05, AttackType.NORMAL));
+        attacks.add(new Attack("Ataque especial", 50, 20, 30, 0.05, AttackType.AREA));
     }
     
     private ArrayList<Consumable> createEmptyInventory(int size) {

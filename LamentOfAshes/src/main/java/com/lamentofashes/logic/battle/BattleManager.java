@@ -72,7 +72,7 @@ public class BattleManager {
             attack.getName(),
             attack.getType()==AttackType.AREA?"Todos":target.getName(),
             Integer.toString(damage),
-            false);
+            damage > attack.getMaxDamage());
         battleResults.add(result);
         
         return result;
@@ -121,8 +121,10 @@ public class BattleManager {
                 damage > e.getBaseDamage());
             enemiesResults.add(result);
             battleResults.add(result);
-            
-            e.stopGuarding();
+        }
+        
+        if(player.isGuarding()){
+            player.stopGuarding();
         }
         return enemiesResults;
     }
@@ -143,7 +145,10 @@ public class BattleManager {
         return result;
     }
     
-    
+    public DefenseResult guard(){
+        player.guard();
+        return new DefenseResult(player.getName(), Double.toString(player.getDefenseReduction() * 100));
+    }
     
     public ArrayList<Event> getBattleResults(){
         return battleResults;

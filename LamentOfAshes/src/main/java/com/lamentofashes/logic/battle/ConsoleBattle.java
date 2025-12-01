@@ -35,10 +35,11 @@ public class ConsoleBattle {
             printEnemies(enemies);
             
             int option = -1;
-            while(option < 1 || option > 2){
+            while(option < 1 || option > 3){
                 System.out.println("Que quieres hacer?");
                 System.out.println("1. atacar");
                 System.out.println("2. usar consumible");
+                System.out.println("3. defenderse");
                 option = scanner.nextInt();
                 scanner.nextLine();
 
@@ -48,6 +49,9 @@ public class ConsoleBattle {
                         break;
                     case 2:
                         useConsumable(player);
+                        break;
+                    case 3:
+                        defend();
                         break;
                 }
             }
@@ -135,4 +139,8 @@ public class ConsoleBattle {
         System.out.println(result);
     }
     
+    private void defend(){
+        DefenseResult result = battleManager.guard();
+        System.out.println(result);
+    }
 }
