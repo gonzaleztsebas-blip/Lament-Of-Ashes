@@ -18,14 +18,23 @@ public class Attack {
     
     private AttackType type;
     
-    public Attack(String name, int powerCost, int minDamage, int maxDamage, double criticChance, AttackType type){
+    public Attack(String name, int powerCost, int minDamage, int maxDamage, double criticChance, int bonusDamage, AttackType type){
         this.random = new Random();
         this.name = name;
         this.powerCost = powerCost;
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
+        this.minDamage = minDamage + bonusDamage;
+        this.maxDamage = maxDamage + bonusDamage;
         this.criticChance = criticChance;
         this.type = type;
+    }
+    
+    public void setCriticChance(double newCriticChance){
+        criticChance = newCriticChance;
+    }
+    
+    public void updateDamage(int bonusDamage){
+        minDamage += bonusDamage;
+        maxDamage += bonusDamage;
     }
     
     public int use(){
@@ -50,6 +59,10 @@ public class Attack {
     
     public AttackType getType(){
         return type;
+    }
+    
+    public double getCriticChance(){
+        return criticChance;
     }
     
     @Override

@@ -46,7 +46,7 @@ public class BattleManager {
     }
     
     public AttackResult playerAttack(int attackIndex, int enemyIndex) { 
-        Attack attack = player.getAttacks().get(attackIndex);
+        Attack attack = player.getWeapon().getAttack(attackIndex);
         if (player.getPower() < attack.getPowerCost()) {
             return new AttackResult(player.getName(), attack.getName() + " (sin poder)", "-",  "0", false);
         }

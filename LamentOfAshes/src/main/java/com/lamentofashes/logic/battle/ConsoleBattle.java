@@ -59,13 +59,10 @@ public class ConsoleBattle {
             for(int i=0; i < enemiesResult.size(); i++){
                 System.out.println(enemiesResult.get(i));
             }
-            player.regenetarePower();
+            player.regeneratePower();
+            player.regenerateHealth();
         }
-        if(battleManager.getPlayer().isDead()){
-            return false;
-        } else {
-            return true;
-        }
+        return !battleManager.getPlayer().isDead();
     }
     
     private void printEnemies(ArrayList<Enemy> enemies){
@@ -98,14 +95,14 @@ public class ConsoleBattle {
         AttackResult result = new AttackResult ("", "", "", "0", false);
         while(result.getEffect().equals("0")){
             System.out.println("Elige el ataque que vas a usar");
-            for(int i = 0; i < player.getAttacks().size(); i++){
-                Attack a = player.getAttacks().get(i);
+            for(int i = 0; i < player.getWeapon().getAttacks().size(); i++){
+                Attack a = player.getWeapon().getAttacks().get(i);
                 System.out.println((i+1) +". " + a.toString());
             }
             int attackChoice = scanner.nextInt() - 1;
             scanner.nextLine();
                 
-            if(attackChoice < 0 || attackChoice > player.getAttacks().size()){
+            if(attackChoice < 0 || attackChoice > player.getWeapon().getAttacks().size()){
             System.out.println("Ataque no valido");
                 continue;
             }

@@ -9,12 +9,12 @@ package com.lamentofashes.model.entity;
  * @author ASUS
  */
 public class Entity {
-    private String name;
-    private int maxHealth;
-    private int health;
-    private int damage;
-    private double defenseReduction;
-    private boolean guarding;
+    protected String name;
+    protected int maxHealth;
+    protected int health;
+    protected int damage;
+    protected double defenseReduction;
+    protected boolean guarding;
     
     public Entity(String name, int maxHealth, int damage, double defense){
         this.name = name;
@@ -82,4 +82,20 @@ public class Entity {
     public boolean isDead(){
         return health == 0;
     }
+    
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public void setDefenseReduction(double defenseReduction) {
+        this.defenseReduction = defenseReduction;
+    }
+
 }
