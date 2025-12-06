@@ -5,6 +5,7 @@
 package com.lamentofashes.logic;
 import com.lamentofashes.logic.factorys.*;
 import com.lamentofashes.logic.round.*;
+import com.lamentofashes.model.GameStats;
 import com.lamentofashes.model.entity.Player;
 import com.lamentofashes.model.item.equipable.*;
 import java.util.ArrayList;
@@ -15,11 +16,18 @@ import java.util.ArrayList;
 public class GameEngine {
     private Player player;
     private int actualRound;
+    private GameStats gameStats;
+    private ScoreManager scoreManager;
+    private long startTime;
     
     
     public GameEngine(){
-        this.player = new Player("Seb");
+        NameMenu name = new NameMenu();
+        this.player = new Player(name.askName());
         this.actualRound = 1;
+        this.gameStats = new GameStats(player.getName());
+        this.scoreManager = new ScoreManager();
+        this.startTime = System.currentTimeMillis();
     }
     
     public void initialEquipSelection() {
@@ -86,10 +94,19 @@ public class GameEngine {
         while(isAlive){
             RoundManager roundManager = new RoundManager(actualRound, player);
             isAlive = roundManager.playRound();
-            if(isAlive){
-                upgrades();
-            }
+            gameStats.addEnemiesDefeated(roundManager.getEnemiesDefeatedThisRound());
+        gameStats.addBossesDefeated(roundManager.getBossesDefeatedThisRound());
+        gameStats.addDamage(roundManager.getDamageDealtThisRound());
+        gameStats.addConsumablesUsed(roundManager.getConsumablesUsedThisRound());
             actualRound++;
         }
+        
+        long endTime = System.currentTimeMillis();
+        int totalSeconds = (int)((endTime - startTime) / 1000);
+        gameStats.setPlayTime(totalSeconds);
+        scoreManager.saveScore(gameStats);
+
+        String highScores = scoreManager.getHighScoresDisplay();
+        System.out.println(highScores);
     }
 }

@@ -82,6 +82,7 @@ public class Player extends Entity{
 
         if (armor != null) {
             maxHealth += armor.getStat();
+            health += armor.getStat();
             defenseReduction = armor.getPassive();
         }
 

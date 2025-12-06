@@ -17,13 +17,15 @@ import java.util.ArrayList;
 public class BattleManager {
     private Player player;
     private ArrayList<Enemy> enemies;
-    private ArrayList<Event> battleResults;
     private EnemyAI ai;
+    
+    private int totalDamageDealt = 0;
+    private int enemiesKilled = 0;
+    private int consumablesUsed = 0;
     
     public BattleManager(ArrayList<Enemy> enemies, Player player){
         this.player = player;
         this.enemies = enemies;
-        this.battleResults = new ArrayList<>();
         this.ai = new EnemyAI();
     }
     
@@ -54,6 +56,7 @@ public class BattleManager {
         Enemy target = enemies.get(enemyIndex);
         
         int damage = attack.use();
+        totalDamageDealt += damage;
         if(attack.getType() == AttackType.AREA){
             specialAttack(damage);
         }else{
@@ -63,6 +66,7 @@ public class BattleManager {
             target.takeDamage(damage);
                 if(target.isDead()){
                     enemies.set(enemyIndex, null);
+                    enemiesKilled++;
                 }
         }
         player.consumePower(attack.getPowerCost());
@@ -73,7 +77,6 @@ public class BattleManager {
             attack.getType()==AttackType.AREA?"Todos":target.getName(),
             Integer.toString(damage),
             damage > attack.getMaxDamage());
-        battleResults.add(result);
         
         return result;
     }
@@ -90,6 +93,7 @@ public class BattleManager {
            e.takeDamage(damage);
            if(e.isDead()){
                enemies.set(i, null);
+               enemiesKilled++;
            }
            
         }
@@ -107,7 +111,6 @@ public class BattleManager {
                 e.stopGuarding();
                 DefenseResult result = new DefenseResult(e.getName(), Double.toString(e.getDefenseReduction() * 100));
                 enemiesResults.add(result);
-                battleResults.add(result);
                 continue;
             }
             
@@ -120,7 +123,6 @@ public class BattleManager {
                 Integer.toString(damage),
                 damage > e.getBaseDamage());
             enemiesResults.add(result);
-            battleResults.add(result);
         }
         
         if(player.isGuarding()){
@@ -140,8 +142,8 @@ public class BattleManager {
             Integer.toString(c.getEffect()),
             c.getType()
         );
-        battleResults.add(result);
         player.useConsumable(consumableIndex);
+        consumablesUsed++;
         return result;
     }
     
@@ -150,16 +152,14 @@ public class BattleManager {
         return new DefenseResult(player.getName(), Double.toString(player.getDefenseReduction() * 100));
     }
     
-    public ArrayList<Event> getBattleResults(){
-        return battleResults;
+    public int getTotalDamageDealt() { 
+        return totalDamageDealt; 
     }
     
-    public Event getAttackResults(int index){
-        return battleResults.get(index);
+    public int getEnemiesKilled() { 
+        return enemiesKilled; 
     }
-    
-    public void clearBattleResults(){
-        battleResults.clear();
+    public int getConsumablesUsed() { 
+        return consumablesUsed; 
     }
-    
 }

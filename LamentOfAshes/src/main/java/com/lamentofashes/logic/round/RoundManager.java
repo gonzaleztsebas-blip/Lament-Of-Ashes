@@ -18,6 +18,11 @@ public class RoundManager {
     private Player player;
     private WaveManager waveManager;
     
+    private int enemiesDefeatedThisRound = 0;
+    private int bossesDefeatedThisRound = 0;
+    private int damageDealtThisRound = 0;
+    private int consumablesUsedThisRound = 0;
+    
     double hpMultiplier;
     double damageMultiplier;
     double criticMultiplier;
@@ -57,12 +62,25 @@ public class RoundManager {
         while(actualWave <= 4){
             BattleManager battleManager = createWave();
             ConsoleBattle consoleBattle = new ConsoleBattle(battleManager);
+            
             player = battleManager.getPlayer();
             boolean result = consoleBattle.startBattle();
+            
+            damageDealtThisRound += battleManager.getTotalDamageDealt();
+            consumablesUsedThisRound += battleManager.getConsumablesUsed();
+            
+            if(actualWave == 4) {
+                if(result) {
+                    bossesDefeatedThisRound++;
+                }
+            } else {
+                enemiesDefeatedThisRound += battleManager.getEnemiesKilled();
+            }
+            
             if(!result){
                 return false;
             }
-            
+     
             if(actualWave < 4){
                ArrayList<Consumable> consumables = waveManager.generateWaveRewards();
                ConsumableMenu consumableMenu = new ConsumableMenu(consumables);
@@ -74,5 +92,21 @@ public class RoundManager {
         }
         
         return true;
+    }
+    
+    public int getEnemiesDefeatedThisRound() { 
+        return enemiesDefeatedThisRound; 
+    }
+
+    public int getBossesDefeatedThisRound() { 
+        return bossesDefeatedThisRound; 
+    }
+
+    public int getDamageDealtThisRound() { 
+        return damageDealtThisRound; 
+    }
+    
+    public int getConsumablesUsedThisRound() { 
+        return consumablesUsedThisRound; 
     }
 }
