@@ -8,8 +8,6 @@ package com.lamentofashes.model.item.equipable;
  *
  * @author ASUS
  */
-public enum EquipableType {
-    WEAPON,
-    ARMOR,
-    SHIELD
+public enum Quality {
+        COMMON, RARE, EPIC
 }

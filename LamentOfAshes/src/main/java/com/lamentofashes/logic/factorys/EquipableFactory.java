@@ -11,41 +11,145 @@ import java.util.Random;
  */
 public class EquipableFactory {
     private Random random = new Random();
-    
+
+
+    private Quality rollQuality() {
+        double q = random.nextDouble();
+        if (q < 0.75) return Quality.COMMON;
+        if (q < 0.95) return Quality.RARE;
+        return Quality.EPIC;
+    }
+
+    private double randomVariance() {
+        return 0.9 + (random.nextDouble() * 0.2); // 0.9 a 1.1
+    }
+
     public Weapon createWeapon() {
-        double roll = random.nextDouble();
+        Quality quality = rollQuality();
+
         int baseStat = 5;
         double basePassive = 0.05;
 
-        int stat = (int)(baseStat * (1 + roll));
-        double passive = basePassive * (1 + (1 - roll));
+        double statMult;
+        switch (quality) {
+            case COMMON:
+                statMult = 1.0;
+                break;
+            case RARE:
+                statMult = 1.25;
+                break;
+            case EPIC:
+                statMult = 1.5;
+                break;
+            default:
+                statMult = 1.0;
+        };
+
+        double passiveMult;
+        switch (quality) {
+            case COMMON:
+                passiveMult = 1.0;
+                break;
+            case RARE:
+                passiveMult = 1.3;
+                break;
+            case EPIC:
+                 passiveMult = 1.7;
+                 break;
+            default:
+                passiveMult = 1.0;
+        };
+
+        int stat = (int) (baseStat * statMult * randomVariance());
+        double passive = basePassive * passiveMult * randomVariance();
         passive = Math.round(passive * 100) / 100.0;
 
-        return new Weapon(stat, passive);
+        return new Weapon(quality,stat, passive);
     }
 
     public Armor createArmor() {
-        double roll = random.nextDouble();
+        Quality quality = rollQuality();
+
         int baseStat = 25;
         double basePassive = 0.1;
 
-        int stat = (int)(baseStat * (1 + roll));
-        double passive = basePassive * (1 + (1 - roll));
+        double statMult;
+        switch (quality) {
+            case COMMON:
+                statMult = 1.0;
+                break;
+            case RARE:
+                statMult = 1.2;
+                break;
+            case EPIC:
+                statMult = 1.45;
+                break;
+            default:
+                statMult = 1.0;
+        };
+
+        double passiveMult;
+        switch (quality) {
+            case COMMON:
+                passiveMult = 1.0;
+                break;
+            case RARE:
+                passiveMult = 1.25;
+                break;
+            case EPIC:
+                 passiveMult = 1.5;
+                 break;
+            default:
+                passiveMult = 1.0;
+        };
+
+        int stat = (int) (baseStat * statMult * randomVariance());
+        double passive = basePassive * passiveMult * randomVariance();
         passive = Math.round(passive * 100) / 100.0;
-        
-        return new Armor(stat, passive);
+
+        return new Armor(quality, stat, passive);
     }
 
-    public Helmet createHelmet() {
-        double roll = random.nextDouble();
+    public Shield createShield() {
+        Quality quality = rollQuality();
+
         int baseStat = 2;
-        double basePassive = 2;
+        double basePassive = 8;
 
-        int stat = (int)(baseStat * (1 + roll));
-        double passive = basePassive * (1 + (1 - roll));
-        passive = (int)(passive) / 1.0;
+        double statMult;
+        switch (quality) {
+            case COMMON:
+                statMult = 1.0;
+                break;
+            case RARE:
+                statMult = 1.35;
+                break;
+            case EPIC:
+                statMult = 1.7;
+                break;
+            default:
+                statMult = 1.0;
+        };
 
-        return new Helmet(stat, passive);
+        double passiveMult;
+        switch (quality) {
+            case COMMON:
+                passiveMult = 1.0;
+                break;
+            case RARE:
+                passiveMult = 1.25;
+                break;
+            case EPIC:
+                 passiveMult = 1.5;
+                 break;
+            default:
+                passiveMult = 1.0;
+        };
+
+        int stat = (int) (baseStat * statMult * randomVariance());
+        double passive = basePassive * passiveMult * randomVariance();
+        passive = (int) passive;   // entero, como debe ser
+
+        return new Shield(quality, stat, passive);
     }
-    
 }

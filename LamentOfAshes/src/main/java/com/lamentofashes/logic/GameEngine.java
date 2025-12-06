@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.lamentofashes.logic;
-import com.lamentofashes.logic.factorys.EquipableFactory;
+import com.lamentofashes.logic.factorys.*;
 import com.lamentofashes.logic.round.*;
 import com.lamentofashes.model.entity.Player;
 import com.lamentofashes.model.item.equipable.*;
@@ -16,8 +16,9 @@ public class GameEngine {
     private Player player;
     private int actualRound;
     
+    
     public GameEngine(){
-        this.player = new Player("Seb", 100, 100);
+        this.player = new Player("Seb");
         this.actualRound = 1;
     }
     
@@ -34,11 +35,11 @@ public class GameEngine {
         player.setArmor((Armor) options.get(index));
 
         
-        options = generateEquipments(EquipableType.HELMET);
-        index = ui.askChoice(options, EquipableType.HELMET);
-        player.setHelmet((Helmet) options.get(index));
+        options = generateEquipments(EquipableType.SHIELD);
+        index = ui.askChoice(options, EquipableType.SHIELD);
+        player.setShield((Shield) options.get(index));
 
-        player.updateStatsFromEquipables();
+        player.applyEquipablesFirstTime();
     }
     
     public ArrayList<Equipable> generateEquipments(EquipableType type){
@@ -49,11 +50,33 @@ public class GameEngine {
                 options.add(equipableFactory.createWeapon());
             }else if(type == EquipableType.ARMOR){
                 options.add(equipableFactory.createArmor());
-            }else if(type == EquipableType.HELMET){
-                options.add(equipableFactory.createHelmet());
+            }else if(type == EquipableType.SHIELD){
+                options.add(equipableFactory.createShield());
             }
         }
         return options;
+    }
+    
+    public void upgrades(){
+        EquipableMenu ui = new EquipableMenu();
+        UpgradeFactory upgradeFactory = new UpgradeFactory(actualRound, player);
+        
+        Upgrade[] options = upgradeFactory.generateUpgrades();
+        Upgrade upgrade = options[ui.askUpgrade(options, player)];
+        
+        switch(upgrade.getType()){
+            case WEAPON:
+                player.getWeapon().upgrade(upgrade.getStatUpgrade(), upgrade.getPassiveUpgrade());
+                break;
+            case ARMOR:
+                player.getArmor().upgrade(upgrade.getStatUpgrade(), upgrade.getPassiveUpgrade());
+                break;
+            case SHIELD:
+                player.getShield().upgrade(upgrade.getStatUpgrade(), upgrade.getPassiveUpgrade());
+                break;
+        }
+        
+        player.refreshStatsFromEquipables();
     }
     
     public void runGame(){
@@ -63,6 +86,9 @@ public class GameEngine {
         while(isAlive){
             RoundManager roundManager = new RoundManager(actualRound, player);
             isAlive = roundManager.playRound();
+            if(isAlive){
+                upgrades();
+            }
             actualRound++;
         }
     }

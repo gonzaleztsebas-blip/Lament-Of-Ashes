@@ -22,14 +22,14 @@ public class EnemyAI {
         
         if(healthRatio <= 0.15){
             probability = random.nextDouble();
-            if(probability <= 0.75){
+            if(probability <= 0.6){
                 return EnemyAction.DEFEND;
             }else{
                 return EnemyAction.ATTACK;
             }
         }else if(healthRatio <= 0.5){
             probability = random.nextDouble();
-            if(probability <= 0.5){
+            if(probability <= 0.3){
                 return EnemyAction.DEFEND;
             }else{
                 return EnemyAction.ATTACK;

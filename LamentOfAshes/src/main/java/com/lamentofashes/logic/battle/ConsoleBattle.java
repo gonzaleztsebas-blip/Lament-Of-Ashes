@@ -31,6 +31,8 @@ public class ConsoleBattle {
             player = battleManager.getPlayer();
             enemies = battleManager.getEnemies();
             
+            player.regenerateHealth();
+            
             System.out.println("\nVida del jugador: " + player.getHealth() + " | Poder: " + player.getPower());
             printEnemies(enemies);
             
@@ -60,7 +62,6 @@ public class ConsoleBattle {
                 System.out.println(enemiesResult.get(i));
             }
             player.regeneratePower();
-            player.regenerateHealth();
         }
         return !battleManager.getPlayer().isDead();
     }

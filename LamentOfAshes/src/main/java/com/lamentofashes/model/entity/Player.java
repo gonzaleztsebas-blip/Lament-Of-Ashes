@@ -17,20 +17,23 @@ public class Player extends Entity{
     private int power;
     private int healthRegeneration;
     
+    private int baseMaxHealth = 100;
+    private int baseHealthRegen = 0;
+    private int basePowerRegen = 0;
+    private double baseReduction = 0.0;
+
+    
     private Weapon weapon;
     private Armor armor;
-    private Helmet helmet;
+    private Shield shield;
     
     private ArrayList<Consumable> inventory;
     private int maxInventorySize = 5;
     
     
-    public Player(String name, int maxHealth, int maxPower){
-        super(name, maxHealth, 0, 0.5);
-        this.powerRegeneration = 15;
-        this.power = 0;
-        this.healthRegeneration = 0;
-        this.maxPower = maxPower;
+    public Player(String name){
+        super(name, 100, 0, 0.5);
+        this.maxPower = 100;
         this.inventory = createEmptyInventory(maxInventorySize);
     }
     
@@ -50,38 +53,46 @@ public class Player extends Entity{
         this.armor = armor;
     }
     
-    public void setHelmet(Helmet helmet){
-        this.helmet = helmet;
+    public void setShield(Shield shield){
+        this.shield = shield;
     }
     
-    public void updateStatsFromEquipables() {
+    public void applyEquipablesFirstTime() {
         if (armor != null) {
             int bonusHealth = armor.getStat();
             setMaxHealth(getMaxHealth() + bonusHealth);
 
             double reduction = armor.getPassive();
-            if (reduction > 0.8) {
-                reduction = 0.8;
-            }
             setDefenseReduction(reduction);
         }
-        
-        health = maxHealth;
-        
-        if (helmet != null) {
-            int regenLife = healthRegeneration += helmet.getStat();
-            if (regenLife > 50) {
-                regenLife = 50;
-            }
-            healthRegeneration = regenLife;
 
-            int regenPower = powerRegeneration += (int)(helmet.getPassive());
-            if (regenPower > 30) {
-                regenPower = 30;
-            }
-            powerRegeneration = regenPower;
+        health = maxHealth;
+
+        if (shield != null) {
+            healthRegeneration = shield.getStat();
+            powerRegeneration = (int) shield.getPassive();
         }
     }
+    
+    public void refreshStatsFromEquipables() {
+        maxHealth = baseMaxHealth;
+        healthRegeneration = baseHealthRegen;
+        powerRegeneration = basePowerRegen;
+        defenseReduction = baseReduction;
+
+        if (armor != null) {
+            maxHealth += armor.getStat();
+            defenseReduction = armor.getPassive();
+        }
+
+        if (shield != null) {
+            healthRegeneration += shield.getStat();
+            powerRegeneration += (int) shield.getPassive();
+        }
+
+    }
+
+
     
     public void consumePower(int powerConsumed){
         power -= powerConsumed;
@@ -140,7 +151,7 @@ public class Player extends Entity{
         return armor;
     }
     
-    public Helmet getHelmet(){
-        return helmet;
+    public Shield getShield(){
+        return shield;
     }
 }

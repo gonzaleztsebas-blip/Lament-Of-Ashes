@@ -8,12 +8,14 @@ package com.lamentofashes.model.item.equipable;
  *
  * @author ASUS
  */
-public class Equipable {
+public abstract class Equipable {
+    private Quality quality;
     private EquipableType type;
     private int stat;
     private double passive;
     
-    public Equipable(EquipableType type, int stat, double passive){
+    public Equipable(Quality quality, EquipableType type, int stat, double passive){
+        this.quality = quality;
         this.type = type;
         this.stat = stat;
         this.passive = passive;
@@ -29,6 +31,20 @@ public class Equipable {
     
     public double getPassive(){
         return passive;
+    }
+    
+    public Quality getQuality(){
+        return quality;
+    }
+    
+    public String stringQuality(){
+        if(quality == Quality.EPIC){
+            return "Epico";
+        }else if(quality == Quality.RARE){
+            return "Raro";
+        }else{
+            return "Comun";
+        }
     }
     
     public void upgrade(int statUpgrade, double passiveUpgrade){
