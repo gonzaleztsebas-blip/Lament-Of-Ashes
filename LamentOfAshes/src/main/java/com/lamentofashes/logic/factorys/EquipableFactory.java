@@ -114,7 +114,7 @@ public class EquipableFactory {
         Quality quality = rollQuality();
 
         int baseStat = 2;
-        double basePassive = 8;
+        double basePassive = 10;
 
         double statMult;
         switch (quality) {
