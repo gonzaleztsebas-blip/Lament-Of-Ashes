@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lamentofashes.controllers.StartGameController">
+   <children>
+      <ImageView fitHeight="480.0" fitWidth="648.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../TITTLESCENE.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="empezarImage" accessibleRole="BUTTON" fitHeight="80.0" fitWidth="200.0" layoutX="50.0" layoutY="223.0" onMouseClicked="#switchToAskName" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../StartGameButton.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="salirButton" accessibleRole="BUTTON" alignment="CENTER" layoutX="79.0" layoutY="374.0" onMouseClicked="#exitGame" prefHeight="71.0" prefWidth="143.0" text="SALIR" textAlignment="CENTER" textFill="#fbf5ef">
+         <font>
+            <Font name="PixelPlay Regular" size="31.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Pane fx:id="mejoresPane" layoutX="61.0" layoutY="303.0" onMouseClicked="#onHighScores">
+         <children>
+            <Label fx:id="mejoresLabel" accessibleRole="BUTTON" alignment="CENTER" layoutY="18.0" onMouseClicked="#onHighScores" prefHeight="35.0" prefWidth="178.0" style="-fx-border-width: 0; -fx-border-color: #fbf5ef;" text="Ver Mejores Puntajes" textAlignment="CENTER" textFill="#fbf5ef">
+               <font>
+                  <Font name="PixelPlay Regular" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <ImageView fx:id="mejoresBorder" fitHeight="71.0" fitWidth="180.0" onMouseClicked="#onHighScores" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Button.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+   </children>
+</AnchorPane>

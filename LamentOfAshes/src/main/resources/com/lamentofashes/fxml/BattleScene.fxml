@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lamentofashes.controllers.BattleSceneController">
+    <children>
+          <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../../../BattleBackGroundV1.png" />
+              </image>
+          </ImageView>
+          <HBox fx:id="enemyContainer" accessibleRole="BUTTON" alignment="TOP_CENTER" layoutX="131.0" layoutY="-4.0" prefHeight="332.0" prefWidth="488.0" />
+          <ImageView fx:id="heroe" accessibleRole="BUTTON" fitHeight="224.0" fitWidth="224.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../../../Caballero.png" />
+              </image>
+          </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="640.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../ActionPanel.png" />
+            </image>
+        </ImageView>
+        <HBox alignment="CENTER" layoutX="9.0" layoutY="341.0" prefHeight="128.0" prefWidth="624.0" spacing="6.0">
+            <children>
+            <VBox prefHeight="128.0" prefWidth="305.0">
+               <children>
+                      <VBox prefHeight="40.0" prefWidth="290.0">
+                          <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="290.0" spacing="8.0">
+                           <children>
+                                      <ProgressBar fx:id="healthBar" blendMode="LIGHTEN" depthTest="DISABLE" prefHeight="20.0" prefWidth="253.0" style="-fx-opacity: 100; -fx-background-color: #4ade80; -fx-background-radius: 0; -fx-border-radius: 0;" />
+                                      <Label fx:id="healthLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" text="100/100" textAlignment="CENTER" textFill="#fbf5ef">
+                                          <font>
+                                              <Font name="PixelPlay Regular" size="15.0" />
+                                          </font>
+                                      </Label>
+                           </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="7.0">
+                           <children>
+                                      <ProgressBar fx:id="powerBar" blendMode="LIGHTEN" depthTest="DISABLE" prefHeight="20.0" prefWidth="254.0" style="-fx-opacity: 100;" />
+                                      <Label fx:id="powerLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" text="100/100" textAlignment="CENTER" textFill="#fbf5ef">
+                                          <font>
+                                              <Font name="PixelPlay Regular" size="15.0" />
+                                          </font>
+                                      </Label>
+                           </children>
+                              </HBox>
+                          </children>
+                      </VBox>
+                      <Label fx:id="gameTerminal" prefHeight="106.0" prefWidth="304.0">
+                          <font>
+                              <Font name="PixelPlay Regular" size="12.0" />
+                          </font>
+                      </Label>
+               </children>
+            </VBox>
+                <HBox alignment="BASELINE_CENTER" prefHeight="128.0" prefWidth="315.0" spacing="6.0">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="136.0" prefWidth="150.0" spacing="8.0">
+                            <children>
+                                <ImageView fx:id="lightAttack" accessibleRole="BUTTON" fitHeight="60.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../LightAttack.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <effect>
+                                        <Blend />
+                                    </effect>
+                                </ImageView>
+                                <ImageView fx:id="specialAttack" accessibleRole="BUTTON" fitHeight="66.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../SpecialAttack.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <effect>
+                                        <Blend />
+                                    </effect>
+                                </ImageView>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                            <children>
+                                <ImageView fx:id="heavyAttack" accessibleRole="BUTTON" fitHeight="60.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../HeavyAttack.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <effect>
+                                        <Blend />
+                                    </effect>
+                                </ImageView>
+                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                    <children>
+                                        <ImageView fx:id="defend" accessibleRole="BUTTON" fitHeight="60.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../DefendButton.png" />
+                                            </image>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </ImageView>
+                                        <ImageView fx:id="consumablesButton" accessibleRole="BUTTON" fitHeight="60.0" fitWidth="73.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../ConsumibleButton.png" />
+                                            </image>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+
+        <!-- Labels de daño y costo -->
+        <HBox alignment="CENTER" layoutX="332.0" layoutY="380.0" prefHeight="17.0" prefWidth="131.0" spacing="58.0">
+            <children>
+                <Label fx:id="attack1Cost" text="0" textFill="#272744">
+                    <font>
+                        <Font name="PixelPlay Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="attack1Damage" text="10-20" textFill="#272744">
+                    <font>
+                        <Font name="PixelPlay Regular" size="12.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER" layoutX="488.0" layoutY="380.0" prefHeight="17.0" prefWidth="131.0" spacing="58.0">
+            <children>
+                <Label fx:id="attack2Cost" text="0" textFill="#272744">
+                    <font>
+                        <Font name="PixelPlay Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="attack2Damage" text="10-20" textFill="#272744">
+                    <font>
+                        <Font name="PixelPlay Regular" size="12.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER" layoutX="332.0" layoutY="448.0" prefHeight="17.0" prefWidth="131.0" spacing="58.0">
+            <children>
+                <Label fx:id="attack3Cost" text="0" textFill="#272744">
+                    <font>
+                        <Font name="PixelPlay Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="attack3Damage" text="10-20" textFill="#272744">
+                    <font>
+                        <Font name="PixelPlay Regular" size="12.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+      <VBox layoutX="10.0" layoutY="339.0" prefHeight="52.0" prefWidth="200.0">
+         <children>
+                <Rectangle fill="#1f93ff00" height="22.0" stroke="#fbf5ef" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="255.0" />
+                <Rectangle fill="#fbf5ef00" height="22.0" stroke="#fbf5ef" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="255.0" />
+         </children>
+      </VBox>
+      <Rectangle fill="#1f93ff00" height="24.0" layoutX="259.0" layoutY="340.0" stroke="#fbf5ef" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="61.0" />
+      <Rectangle fill="#1f93ff00" height="24.0" layoutX="260.0" layoutY="359.0" stroke="#fbf5ef" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="5.0" width="61.0" />
+
+
+    </children>
+</AnchorPane>

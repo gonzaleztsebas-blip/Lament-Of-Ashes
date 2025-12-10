@@ -4,6 +4,7 @@ import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.media.AudioClip;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.util.HashSet;
