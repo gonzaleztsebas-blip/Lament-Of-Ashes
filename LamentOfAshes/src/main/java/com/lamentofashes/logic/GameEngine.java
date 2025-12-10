@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.lamentofashes.logic;
+import com.lamentofashes.controllers.AskNameController;
 import com.lamentofashes.logic.factorys.*;
 import com.lamentofashes.logic.round.*;
 import com.lamentofashes.model.GameStats;
@@ -14,16 +15,16 @@ import java.util.ArrayList;
  * @author ASUS
  */
 public class GameEngine {
-    private Player player;
-    private int actualRound;
-    private GameStats gameStats;
+    public Player player;
+    public int actualRound;
+    GameStats gameStats;
     private ScoreManager scoreManager;
-    private long startTime;
+    long startTime;
     
     
     public GameEngine(){
-        NameMenu name = new NameMenu();
-        this.player = new Player(name.askName());
+        AskNameController name = new AskNameController();
+        this.player = new Player(name.getPlayerName());
         this.actualRound = 1;
         this.gameStats = new GameStats(player.getName());
         this.scoreManager = new ScoreManager();

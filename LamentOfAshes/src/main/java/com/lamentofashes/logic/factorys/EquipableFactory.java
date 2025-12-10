@@ -27,8 +27,8 @@ public class EquipableFactory {
     public Weapon createWeapon() {
         Quality quality = rollQuality();
 
-        int baseStat = 5;
-        double basePassive = 0.05;
+        int baseStat = 10;
+        double basePassive = 0.1;
 
         double statMult;
         switch (quality) {
@@ -70,8 +70,8 @@ public class EquipableFactory {
     public Armor createArmor() {
         Quality quality = rollQuality();
 
-        int baseStat = 25;
-        double basePassive = 0.1;
+        int baseStat = 50;
+        double basePassive = 0.2;
 
         double statMult;
         switch (quality) {
@@ -113,8 +113,8 @@ public class EquipableFactory {
     public Shield createShield() {
         Quality quality = rollQuality();
 
-        int baseStat = 2;
-        double basePassive = 10;
+        int baseStat = 4;
+        double basePassive = 20;
 
         double statMult;
         switch (quality) {

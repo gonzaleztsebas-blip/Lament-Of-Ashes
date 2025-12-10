@@ -155,4 +155,8 @@ public class Player extends Entity{
     public Shield getShield(){
         return shield;
     }
+
+    public int getMaxPower() {
+        return maxPower;
+    }
 }

@@ -19,7 +19,7 @@ public class Weapon extends Equipable{
     
     private void generateAttacks(){
         this.attacks = new ArrayList<>();
-        attacks.add(new Attack("Ataque moderado", 0, 10, 20, getPassive(), getStat(), AttackType.NORMAL));
+        attacks.add(new Attack("Ataque debil", 0, 10, 20, getPassive(), getStat(), AttackType.NORMAL));
         attacks.add(new Attack("Ataque fuerte", 25, 30, 40, getPassive(), getStat(), AttackType.NORMAL));
         attacks.add(new Attack("Ataque especial", 50, 20, 30, getPassive(), getStat(), AttackType.AREA));
     }

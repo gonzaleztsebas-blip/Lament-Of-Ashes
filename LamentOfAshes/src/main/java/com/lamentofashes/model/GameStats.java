@@ -119,6 +119,10 @@ public class GameStats {
     public int getPlayTime() { 
         return playTime; 
     }
+
+    public void setRoundReached(int roundReached) {
+        this.roundReached = roundReached;
+    }
     
     @Override
     public String toString() {

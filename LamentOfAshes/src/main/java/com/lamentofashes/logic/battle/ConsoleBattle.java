@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.lamentofashes.logic.battle;
+
 import com.lamentofashes.model.entity.*;
 import com.lamentofashes.model.entity.enemy.*;
 import com.lamentofashes.model.skills.Attack;
@@ -11,33 +12,34 @@ import com.lamentofashes.model.event.ConsumableResult;
 import com.lamentofashes.model.item.consumable.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 /**
  *
  * @author ASUS
  */
 public class ConsoleBattle {
+
     private BattleManager battleManager;
     private Scanner scanner = new Scanner(System.in);
-    
+
     public ConsoleBattle(BattleManager battleManager) {
         this.battleManager = battleManager;
     }
-    
-    
-    public boolean startBattle(){
+
+    public boolean startBattle() {
         Player player;
         ArrayList<Enemy> enemies;
-        while(!battleManager.isBattleOver()){
+        while (!battleManager.isBattleOver()) {
             player = battleManager.getPlayer();
             enemies = battleManager.getEnemies();
-            
+
             player.regenerateHealth();
-            
+
             System.out.println("\nVida del jugador: " + player.getHealth() + " | Poder: " + player.getPower());
             printEnemies(enemies);
-            
+
             int option = -1;
-            while(option < 1 || option > 3){
+            while (option < 1 || option > 3) {
                 System.out.println("Que quieres hacer?");
                 System.out.println("1. atacar");
                 System.out.println("2. usar consumible");
@@ -45,7 +47,7 @@ public class ConsoleBattle {
                 option = scanner.nextInt();
                 scanner.nextLine();
 
-                switch(option){
+                switch (option) {
                     case 1:
                         attack(player, enemies);
                         break;
@@ -58,86 +60,103 @@ public class ConsoleBattle {
                 }
             }
             ArrayList<Event> enemiesResult = battleManager.enemiesTurn();
-            for(int i=0; i < enemiesResult.size(); i++){
+            for (int i = 0; i < enemiesResult.size(); i++) {
                 System.out.println(enemiesResult.get(i));
             }
             player.regeneratePower();
         }
         return !battleManager.getPlayer().isDead();
     }
-    
-    private void printEnemies(ArrayList<Enemy> enemies){
-        for(int i = 0; i < enemies.size(); i++){
+
+    private void printEnemies(ArrayList<Enemy> enemies) {
+        for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
-            if(e == null){
+            if (e == null) {
                 continue;
             }
-            System.out.println((i+1) + ": " + e.getName() + " - HP: " + e.getHealth() + " - Dano: " + e.getBaseDamage());
+            System.out.println((i + 1) + ": " + e.getName() + " - HP: " + e.getHealth() + " - Dano: " + e.getBaseDamage());
         }
     }
-    
-    private void attack(Player player, ArrayList<Enemy> enemies){
+
+    private void attack(Player player, ArrayList<Enemy> enemies) {
         int enemyChoice = -1;
-        while(enemyChoice < 0 || enemyChoice >= enemies.size()){
+        while (enemyChoice < 0 || enemyChoice >= enemies.size()) {
             System.out.println("A quien deseas atacar?");
             System.out.println("Enemigos:");
             printEnemies(enemies);
             System.out.println("Elige a quien atacar: ");
             enemyChoice = scanner.nextInt() - 1;
             scanner.nextLine();
-            if(enemyChoice < 0 || enemyChoice > enemies.size()){
+            if (enemyChoice < 0 || enemyChoice > enemies.size()) {
                 System.out.println("Enemigo no valido");
-            }else if(enemies.get(enemyChoice) == null){
+            } else if (enemies.get(enemyChoice) == null) {
                 System.out.println("Enemigo muerto");
                 enemyChoice = -1;
             }
         }
-            
-        AttackResult result = new AttackResult ("", "", "", "0", false);
-        while(result.getEffect().equals("0")){
+
+        AttackResult result = new AttackResult("", "", "", "0", false);
+        while (result.getEffect().equals("0")) {
             System.out.println("Elige el ataque que vas a usar");
-            for(int i = 0; i < player.getWeapon().getAttacks().size(); i++){
+            for (int i = 0; i < player.getWeapon().getAttacks().size(); i++) {
                 Attack a = player.getWeapon().getAttacks().get(i);
-                System.out.println((i+1) +". " + a.toString());
+                System.out.println((i + 1) + ". " + a.toString());
             }
             int attackChoice = scanner.nextInt() - 1;
             scanner.nextLine();
-                
-            if(attackChoice < 0 || attackChoice > player.getWeapon().getAttacks().size()){
-            System.out.println("Ataque no valido");
+
+            if (attackChoice < 0 || attackChoice > player.getWeapon().getAttacks().size()) {
+                System.out.println("Ataque no valido");
                 continue;
             }
-                
+
             result = battleManager.playerAttack(attackChoice, enemyChoice);
-            System.out.println(result);       
+            System.out.println(result);
         }
     }
-    
-    private void useConsumable(Player player){
-        ConsumableResult result = new ConsumableResult("", "", "0", 1);
-        while(result.getEffect().equals("0")){
+
+    private void useConsumable(Player player) {
+        ConsumableResult result = null;
+
+        while (result == null) {
             System.out.println("Elige el consumible: ");
-            for(int i = 0; i < player.getInventory().size(); i++){
+
+            // Verificar si hay consumibles disponibles
+            boolean hasConsumables = false;
+            for (int i = 0; i < player.getInventory().size(); i++) {
                 Consumable c = player.getInventory().get(i);
-                if(c == null){
-                    continue;
+                if (c != null) {
+                    System.out.println((i + 1) + ". " + c);
+                    hasConsumables = true;
                 }
-                System.out.println((i + 1) + ". " + c);
             }
+
+            // Si no hay consumibles, salir
+            if (!hasConsumables) {
+                System.out.println("No tienes consumibles disponibles");
+                return;
+            }
+
             int choice = scanner.nextInt() - 1;
             scanner.nextLine();
-            if(choice < 0 || choice > player.getInventory().size()){
+
+            if (choice < 0 || choice >= player.getInventory().size()) {
                 System.out.println("Objeto no valido");
                 continue;
             }
+
             result = battleManager.useConsumable(choice);
+
+            // Si el resultado es null, seguir pidiendo
+            if (result == null) {
+                System.out.println("No se pudo usar ese consumible");
+            }
         }
-        
-        
+
         System.out.println(result);
     }
-    
-    private void defend(){
+
+    private void defend() {
         DefenseResult result = battleManager.guard();
         System.out.println(result);
     }

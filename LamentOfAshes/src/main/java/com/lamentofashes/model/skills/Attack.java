@@ -56,6 +56,10 @@ public class Attack {
     public int getMaxDamage(){
         return maxDamage;
     }
+
+    public int getMinDamage() {
+        return minDamage;
+    }
     
     public AttackType getType(){
         return type;

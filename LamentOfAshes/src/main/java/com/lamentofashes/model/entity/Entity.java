@@ -98,4 +98,8 @@ public class Entity {
         this.defenseReduction = defenseReduction;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
