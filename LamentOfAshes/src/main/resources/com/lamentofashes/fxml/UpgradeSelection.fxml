@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="480" prefWidth="640" style="-fx-background-color: #272744;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lamentofashes.controllers.UpgradeSelectionController">
+    
+    <VBox alignment="CENTER" spacing="30" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        
+        <!-- TÍTULO -->
+        <Label fx:id="titulo" style="-fx-text-fill: #fbf5ef; -fx-font-size: 40px; -fx-font-family: 'PixelPlay';" text="ELIGE UNA MEJORA" />
+        
+        <!-- CONTENEDOR DE OPCIONES -->
+        <HBox alignment="CENTER" prefHeight="350" spacing="50">
+            
+            <!-- OPCIÓN 1 -->
+            <VBox fx:id="upgradeCard1" alignment="TOP_CENTER" prefWidth="240" spacing="12" style="-fx-background-color: #3a3a5d; -fx-border-color: #f2d3ab; -fx-border-width: 3; -fx-background-radius: 0; -fx-border-radius: 0;">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="20" />
+                </padding>
+                
+                <!-- Icono -->
+                <ImageView fx:id="upgradeIcon1" fitHeight="70" fitWidth="70" preserveRatio="true" />
+                
+                <!-- Nombre del tipo -->
+                <Label fx:id="upgradeName1" alignment="CENTER" style="-fx-text-fill: #f2d3ab; -fx-font-size: 24px; -fx-font-family: 'PixelPlay';" wrapText="true" />
+                
+                <!-- Separador -->
+                <Separator prefWidth="180" style="-fx-background-color: #f2d3ab;" />
+                
+                <!-- Estadísticas -->
+                <VBox alignment="CENTER" prefHeight="80.0" prefWidth="194.0" spacing="8">
+                    <Label fx:id="upgradeStat1" alignment="CENTER" style="-fx-text-fill: #4ade80; -fx-font-size: 16px; -fx-font-family: 'PixelPlay';" wrapText="true" />
+                    
+                    <Label fx:id="upgradePassive1" alignment="CENTER" style="-fx-text-fill: #b499c6; -fx-font-size: 16px; -fx-font-family: 'PixelPlay';" wrapText="true" />
+                </VBox>
+                
+                <!-- Espaciador para empujar botón abajo -->
+                <Region VBox.vgrow="ALWAYS" />
+                
+                <!-- Botón -->
+                <Button fx:id="selectButton1" onAction="#onSelect1" onMouseEntered="#onButton1Hover" onMouseExited="#onButton1Exit" prefHeight="40" prefWidth="180" style="-fx-background-color: #f2d3ab; -fx-text-fill: #272744; -fx-font-size: 20px; -fx-font-family: 'PixelPlay'; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-radius: 8;" text="SELECCIONAR">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </VBox>
+            
+            <!-- OPCIÓN 2 -->
+            <VBox fx:id="upgradeCard2" alignment="TOP_CENTER" prefWidth="240" spacing="12" style="-fx-background-color: #3a3a5d; -fx-border-color: #f2d3ab; -fx-border-width: 3; -fx-background-radius: 0; -fx-border-radius: 0;">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="20" />
+                </padding>
+                
+                <!-- Icono -->
+                <ImageView fx:id="upgradeIcon2" fitHeight="70" fitWidth="70" preserveRatio="true" />
+                
+                <!-- Nombre del tipo -->
+                <Label fx:id="upgradeName2" alignment="CENTER" style="-fx-text-fill: #f2d3ab; -fx-font-size: 24px; -fx-font-family: 'PixelPlay';" wrapText="true" />
+                
+                <!-- Separador -->
+                <Separator prefWidth="180" style="-fx-background-color: #f2d3ab;" />
+                
+                <!-- Estadísticas -->
+                <VBox alignment="CENTER" prefHeight="80.0" prefWidth="194.0" spacing="8">
+                    <Label fx:id="upgradeStat2" alignment="CENTER" style="-fx-text-fill: #4ade80; -fx-font-size: 16px; -fx-font-family: 'PixelPlay';" wrapText="true" />
+                    
+                    <Label fx:id="upgradePassive2" alignment="CENTER" style="-fx-text-fill: #b499c6; -fx-font-size: 16px; -fx-font-family: 'PixelPlay';" wrapText="true" />
+                </VBox>
+                
+                <!-- Espaciador para empujar botón abajo -->
+                <Region VBox.vgrow="ALWAYS" />
+                
+                <!-- Botón -->
+                <Button fx:id="selectButton2" onAction="#onSelect2" onMouseEntered="#onButton2Hover" onMouseExited="#onButton2Exit" prefHeight="40" prefWidth="180" style="-fx-background-color: #f2d3ab; -fx-text-fill: #272744; -fx-font-size: 20px; -fx-font-family: 'PixelPlay'; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-radius: 8;" text="SELECCIONAR">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </VBox>
+            
+        </HBox>
+    </VBox>
+</AnchorPane>

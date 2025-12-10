@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Ellipse?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.lamentofashes.controllers.BattleSceneController"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: #3d3668;">
+    
+    <!-- Label de ronda (arriba a la izquierda) -->
+    <Label fx:id="roundLabel" 
+           layoutX="20.0" layoutY="10.0"
+           style="-fx-text-fill: #fbf5ef; -fx-font-size: 20px; -fx-font-weight: bold;"
+           text="Ronda 1"/>
+    
+    <!-- Contenedor de enemigos (parte superior) -->
+    <HBox fx:id="enemyContainer" 
+          layoutX="150.0" layoutY="50.0"
+          alignment="CENTER" 
+          spacing="50"
+          prefWidth="500.0"
+          prefHeight="150.0">
+        <!-- Los enemigos se generan dinámicamente aquí -->
+    </HBox>
+    
+    <!-- Elipse del suelo (fondo decorativo) -->
+    <Ellipse centerX="400.0" centerY="320.0" 
+             radiusX="280.0" radiusY="100.0"
+             fill="#2f2654" 
+             stroke="transparent"/>
+    
+    <!-- Héroe (lado izquierdo) -->
+    <VBox layoutX="50.0" layoutY="220.0" alignment="CENTER" spacing="10">
+        <ImageView fx:id="heroSprite" 
+                  fitWidth="80" 
+                  fitHeight="80" 
+                  preserveRatio="true"/>
+    </VBox>
+    
+    <!-- Barras del héroe (lado derecho) -->
+    <VBox layoutX="500.0" layoutY="320.0" spacing="8">
+        <!-- Barra de vida -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <ProgressBar fx:id="heroHealthBar" 
+                        prefWidth="220.0" 
+                        prefHeight="18.0"
+                        style="-fx-accent: #4ade80;"/>
+            <Label fx:id="heroHealthLabel" 
+                   style="-fx-text-fill: #fbf5ef; -fx-font-size: 12px;"
+                   text="100/100"/>
+        </HBox>
+        
+        <!-- Barra de maná -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <ProgressBar fx:id="heroManaBar" 
+                        prefWidth="220.0" 
+                        prefHeight="15.0"
+                        style="-fx-accent: #60a5fa;"/>
+            <Label fx:id="heroManaLabel" 
+                   style="-fx-text-fill: #fbf5ef; -fx-font-size: 11px;"
+                   text="50/50"/>
+        </HBox>
+    </VBox>
+    
+    <!-- Panel inferior con terminal y ataques -->
+    <HBox layoutX="20.0" layoutY="370.0" spacing="10" prefWidth="760.0">
+        
+        <!-- Terminal (lado izquierdo) -->
+        <TextArea fx:id="gameTerminal"
+                 editable="false"
+                 wrapText="true"
+                 prefWidth="330.0"
+                 prefHeight="210.0"
+                 style="-fx-control-inner-background: #ffffff; 
+                        -fx-text-fill: #000000; 
+                        -fx-font-family: 'Courier New';
+                        -fx-font-size: 11px;
+                        -fx-border-color: #000000;
+                        -fx-border-width: 3;"/>
+        
+        <!-- Botones de ataque (lado derecho) -->
+        <VBox spacing="5" prefWidth="420.0">
+            
+            <!-- Primera fila: 2 ataques -->
+            <HBox spacing="5">
+                <!-- Ataque 1 -->
+                <VBox fx:id="attack1Box" 
+                      alignment="CENTER"
+                      spacing="5"
+                      prefWidth="207.0"
+                      prefHeight="100.0"
+                      style="-fx-background-color: #d4a574; 
+                             -fx-border-color: #000000; 
+                             -fx-border-width: 3;
+                             -fx-cursor: hand;">
+                    <Label fx:id="attack1Name" 
+                           style="-fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"
+                           text="Ataque Débil"/>
+                    <HBox spacing="20" alignment="CENTER">
+                        <Label fx:id="attack1Cost" 
+                               style="-fx-text-fill: #000000; -fx-font-size: 12px;"
+                               text="⚡ 0"/>
+                        <Label fx:id="attack1Damage" 
+                               style="-fx-text-fill: #000000; -fx-font-size: 12px;"
+                               text="⚔ 10-20"/>
+                    </HBox>
+                </VBox>
+                
+                <!-- Ataque 2 -->
+                <VBox fx:id="attack2Box" 
+                      alignment="CENTER"
+                      spacing="5"
+                      prefWidth="207.0"
+                      prefHeight="100.0"
+                      style="-fx-background-color: #d4a574; 
+                             -fx-border-color: #000000; 
+                             -fx-border-width: 3;
+                             -fx-cursor: hand;">
+                    <Label fx:id="attack2Name" 
+                           style="-fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"
+                           text="Ataque Fuerte"/>
+                    <HBox spacing="20" alignment="CENTER">
+                        <Label fx:id="attack2Cost" 
+                               style="-fx-text-fill: #000000; -fx-font-size: 12px;"
+                               text="⚡ 25"/>
+                        <Label fx:id="attack2Damage" 
+                               style="-fx-text-fill: #000000; -fx-font-size: 12px;"
+                               text="⚔ 30-40"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+            
+            <!-- Segunda fila: Ataque especial + 2 slots vacíos -->
+            <HBox spacing="5">
+                <!-- Ataque 3 -->
+                <VBox fx:id="attack3Box" 
+                      alignment="CENTER"
+                      spacing="5"
+                      prefWidth="207.0"
+                      prefHeight="100.0"
+                      style="-fx-background-color: #d4a574; 
+                             -fx-border-color: #000000; 
+                             -fx-border-width: 3;
+                             -fx-cursor: hand;">
+                    <Label fx:id="attack3Name" 
+                           style="-fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"
+                           text="Ataque Especial"/>
+                    <HBox spacing="15" alignment="CENTER">
+                        <Label fx:id="attack3Cost" 
+                               style="-fx-text-fill: #000000; -fx-font-size: 12px;"
+                               text="⚡ 50"/>
+                        <Label fx:id="attack3Damage" 
+                               style="-fx-text-fill: #000000; -fx-font-size: 11px;"
+                               text="⚔ 20-30"/>
+                    </HBox>
+                </VBox>
+                
+                <!-- Slots vacíos (consumibles o habilidades futuras) -->
+                <VBox alignment="CENTER"
+                      prefWidth="100.0"
+                      prefHeight="100.0"
+                      style="-fx-background-color: #2f2654; 
+                             -fx-border-color: #000000; 
+                             -fx-border-width: 3;">
+                </VBox>
+                
+                <VBox alignment="CENTER"
+                      prefWidth="100.0"
+                      prefHeight="100.0"
+                      style="-fx-background-color: #2f2654; 
+                             -fx-border-color: #000000; 
+                             -fx-border-width: 3;">
+                </VBox>
+            </HBox>
+            
+        </VBox>
+        
+    </HBox>
+    
+</AnchorPane>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lamentofashes.controllers.AskNameController">
+   <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../askName.png" />
+      </image>
+   </ImageView>
+     
+        <Label fx:id="textLabel" alignment="CENTER" layoutX="70.0" layoutY="126.0" prefHeight="185.0" prefWidth="500.0" style="-fx-background-color: transparent; -fx-text-fill: #fbf5ef;" textAlignment="CENTER" wrapText="true">
+        </Label>
+     
+        <TextField fx:id="nameField" alignment="CENTER" layoutY="328.0" onAction="#onEnterPressed" prefHeight="50.0" prefWidth="648.0" promptText="Escribe tu nombre..." style="-fx-background-color: transparent;                            -fx-text-fill: #fbf5ef;                            -fx-prompt-text-fill: #fbf5ef80;                           -fx-border-color: #fbf5ef;                            -fx-border-width: 0 0 2 0;                           -fx-font-size: 18px;" visible="false">
+      <font>
+         <Font name="PixelPlay Regular" size="12.0" />
+      </font>
+   </TextField>
+    
+</AnchorPane>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.lamentofashes.controllers.ConsumiblesWindowController"
+      fx:id="contenedorPrincipal"
+      spacing="10" 
+      alignment="TOP_CENTER"
+      prefWidth="420"
+      style="-fx-background-color: #272744;">
+    
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+    
+    <!-- Título -->
+    <Label fx:id="titulo" 
+           text="SELECCIONA UN CONSUMIBLE"
+           style="-fx-text-fill: #fbf5ef; -fx-font-weight: bold; -fx-font-size: 18px;">
+        <padding>
+            <Insets bottom="10"/>
+        </padding>
+    </Label>
+    
+    <!-- ScrollPane para los consumibles -->
+    <ScrollPane fitToWidth="true" 
+                style="-fx-background: transparent; -fx-background-color: transparent;"
+                VBox.vgrow="ALWAYS">
+        <VBox fx:id="contenedorConsumibles" spacing="10">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="5"/>
+            </padding>
+        </VBox>
+    </ScrollPane>
+    
+    <!-- Botón Cancelar -->
+    <Button fx:id="btnCancelar" 
+            text="CANCELAR"
+            prefWidth="150" 
+            prefHeight="40"
+            style="-fx-background-color: #494d7e; -fx-text-fill: #fbf5ef; -fx-font-weight: bold; -fx-font-size: 14px; -fx-border-color: #f2d3ab; -fx-border-width: 2; -fx-background-radius: 0; -fx-border-radius: 0;"
+            onMouseEntered="#onCancelarHover"
+            onMouseExited="#onCancelarExit"
+            onAction="#onCancelar">
+        <VBox.margin>
+            <Insets top="10"/>
+        </VBox.margin>
+    </Button>
+    
+</VBox>
