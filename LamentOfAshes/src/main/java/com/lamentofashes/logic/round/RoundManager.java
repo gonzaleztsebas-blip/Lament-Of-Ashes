@@ -46,9 +46,9 @@ public class RoundManager {
      * Inicializa la ronda según sea normal o boss
      */
     private void initializeRound() {
-        double hpMultiplier = 1.0 + ((roundNumber - 1) * 0.1);
-        double damageMultiplier = 1.0 + ((roundNumber - 1) * 0.1);
-        double criticMultiplier = 1.0 + ((roundNumber - 1) * 0.05);
+        double hpMultiplier = 1.0 + ((roundNumber - 1) * 0.12);
+        double damageMultiplier = 1.0 + ((roundNumber - 1) * 0.08);
+        double criticMultiplier = 1.0 + ((roundNumber - 1) * 0.03);
         
         System.out.println("=== INICIALIZANDO RONDA " + roundNumber + " ===");
         System.out.println("isBossRound: " + isBossRound());
@@ -67,9 +67,6 @@ public class RoundManager {
         } else {
             // Para rondas normales: calcular posición en el ciclo (1, 2, o 3)
             int positionInCycle = ((roundNumber - 1) % 4) + 1; // 1, 2, o 3
-            System.out.println("Ronda normal - Posición en ciclo: " + positionInCycle);
-            System.out.println("Cálculo: ((" + roundNumber + " - 1) % 4) + 1 = " + positionInCycle);
-            
             WaveManager wave = new WaveManager(
                 positionInCycle, // 1=2 enemigos, 2=3 enemigos, 3=4 enemigos
                 player,
@@ -81,8 +78,6 @@ public class RoundManager {
         }
         
         currentWave = waves.get(0);
-        System.out.println("✅ Enemigos en esta ronda: " + currentWave.getAliveEnemies().size());
-        System.out.println("=================================");
     }
     
     /**
@@ -150,11 +145,6 @@ public class RoundManager {
             if (isBossRound()) {
                 bossesDefeatedThisRound = 1;
             }
-            
-            System.out.println("Ronda " + roundNumber + " finalizada:");
-            System.out.println("- Enemigos derrotados: " + enemiesDefeatedThisRound);
-            System.out.println("- Daño total: " + damageDealtThisRound);
-            System.out.println("- Consumibles usados: " + consumablesUsedThisRound);
         }
     }
     

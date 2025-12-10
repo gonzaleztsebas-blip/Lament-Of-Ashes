@@ -231,7 +231,7 @@ public class EquipmentSelectionController {
             Armor a = (Armor) e;
             sb.append("VIDA: +").append(a.getStat()).append("\n");
             // Muestra la pasiva (reducción de daño)
-            sb.append("RED DE DAÑO: ").append((int) (a.getPassive()));
+            sb.append("RED DE DAÑO: ").append((int) (a.getPassive()*100)).append("%");
         } else if (e instanceof Shield) {
             Shield s = (Shield) e;
             sb.append("REGEN VIDA: +").append(s.getStat()).append("\n");

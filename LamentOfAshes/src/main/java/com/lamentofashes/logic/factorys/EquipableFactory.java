@@ -113,8 +113,8 @@ public class EquipableFactory {
     public Shield createShield() {
         Quality quality = rollQuality();
 
-        int baseStat = 4;
-        double basePassive = 20;
+        int baseStat = 2;
+        double basePassive = 15;
 
         double statMult;
         switch (quality) {
