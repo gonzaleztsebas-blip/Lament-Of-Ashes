@@ -96,9 +96,9 @@ public class GameEngine {
             RoundManager roundManager = new RoundManager(actualRound, player);
             isAlive = roundManager.playRound();
             gameStats.addEnemiesDefeated(roundManager.getEnemiesDefeatedThisRound());
-        gameStats.addBossesDefeated(roundManager.getBossesDefeatedThisRound());
-        gameStats.addDamage(roundManager.getDamageDealtThisRound());
-        gameStats.addConsumablesUsed(roundManager.getConsumablesUsedThisRound());
+            gameStats.addBossesDefeated(roundManager.getBossesDefeatedThisRound());
+            gameStats.addDamage(roundManager.getDamageDealtThisRound());
+            gameStats.addConsumablesUsed(roundManager.getConsumablesUsedThisRound());
             actualRound++;
         }
         

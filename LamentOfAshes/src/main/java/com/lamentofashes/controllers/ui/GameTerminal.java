@@ -113,7 +113,7 @@ public class GameTerminal {
      * Muestra un mensaje con el efecto de máquina de escribir (delay por defecto: 40ms).
      */
     public void printTyping(String message) {
-        printTyping(message, 40);
+        printTyping(message, 80);
     }
 
     /**
